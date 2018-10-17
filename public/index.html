@@ -90,7 +90,6 @@
 <script>
     let loggInnUsername = document.getElementById("logInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
-
     let output = document.getElementById("output");
 
 
@@ -120,13 +119,15 @@
 
         sendData("/innafor/users/login", data)
             .then(json => {
-                localStorage.setItem("logindata", JSON.stringify(json));
-                console.log(localStorage);
+                console.log(json);
                 output.style.color = "white";
                 output.innerHTML = json.mld;
-                if (status == 200) {
-                    window.location = "forside.html";
-                }
+            if(json.status == 200){
+                console.log("yay");
+                window.location = json.forside;
+            }else{
+                console.log("ops");
+            }
             })
             .catch(error => {
                 output.innerHTML = error;
