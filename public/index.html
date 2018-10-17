@@ -102,7 +102,6 @@ height: 100%;
 
     let loggInnUsername = document.getElementById("logInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
-
     let output = document.getElementById("output");
     
     
@@ -132,10 +131,15 @@ height: 100%;
 
         sendData("/innafor/users/login", data)
             .then(json => {
-                localStorage.setItem("logindata", JSON.stringify(json));
-                console.log(localStorage);
+                console.log(json.status);
                 output.style.color = "white";
                 output.innerHTML = json.mld;
+            if(json.status == 200){
+                console.log("yay");
+                
+            }else{
+                console.log("ops");
+            }
             })
             .catch(error => {
                 output.innerHTML = error;

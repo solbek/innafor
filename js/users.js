@@ -20,11 +20,13 @@ router.post("/login/", async function (req, res) {
 
         if (nameMatch, passwordMatch) {
             res.status(200).json({
+                status: 200,
                 mld: "Hello, " + username,
                 username: username
             });
         } else {
             res.status(401).json({
+                status: 401,
                 mld: "Feil brukernavn eller passord"
             });
 
