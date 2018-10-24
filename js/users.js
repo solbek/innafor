@@ -15,24 +15,22 @@ router.post("/login/", async function (req, res) {
 
     try {
         let datarows = await db.any(query);
-        let nameMatch = datarows[0].username == username ? true : false;
-        let passwordMatch = await bcrypt.compareSync(password, datarows[0].hash);
-
-        if (nameMatch, passwordMatch) {
-            res.status(200).json({
-                status: 200,
-                mld: "Hello, " + username,
-                username: username,
-                forside: "forside.html"
-            });
+        console.log(datarows);
+        let nameMatch = datarows.length == 1 ? true : false;
+        if (nameMatch == true) {
+            let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
+            if (nameMatch, passwordMatch) {
+                res.status(200).json({
+                    mld: "Hello, " + username,
+                    username: username
+                });
+            }
         } else {
             res.status(401).json({
-                status: 401,
                 mld: "Feil brukernavn eller passord"
             });
 
         }
-
     } catch (err) {
         res.status(500).json({
             error: err
