@@ -20,9 +20,6 @@
     <link rel="stylesheet" href="stylesMain.css">
     <link rel="stylesheet" href="stylesIndex.css">
     <link rel="stylesheet" href="stylesForside.css">
-    
-    <!-- JAVASCRIPT -->
-    <script src="script.js" type="application/javascript"></script>
 
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
@@ -46,7 +43,7 @@
 </head>
 
 <body>
-     <div id="content"></div>
+    <div id="content"></div>
 
     <!--
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -69,7 +66,7 @@
         </div>
     </nav>
 -->
-    
+
 
     <template id="login">
         <!-- LOGO -->
@@ -90,7 +87,7 @@
             <h3 id="output"></h3>
         </div>
     </template>
-    
+
     <template id="mainPage">
         <!-- LOGO -->
         <div class="container title">
@@ -161,91 +158,7 @@
 
 </body>
 
-<style>
-    #body {
-        width: 100%;
-        height: 100%;
-    }
-
-    h1,
-    h3 {
-        font-family: sans-serif;
-        color: white;
-
-    }
-
-    body {
-        background-color: deepskyblue;
-
-    }
-
-    #loggInnDiv {
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 70vh;
-
-    }
-
-
-
-    input {
-        height: 20px;
-    }
-
-</style>
-
-    <script>
-    
-    displayLogin();
-    
-    /*
-    (function () {
-            if (! authenticatedUser) {
-                displayLoginForm();
-            } else{
-                displaySubmitRequestForm();
-            }
-        })();
-    */
-
-        function addElement(element){
-            document.getElementById("content").appendChild(element);
-        }
-
-        function clearScreen(){
-            document.getElementById("content").innerHTML = "";
-        }
-
-        function createElementFromTemplate(templateID){
-            let template = document.querySelector(templateID);
-            let clone = document.importNode(template.content, true);
-            return clone;
-        }
-
-        function displayLogin(){
-            let login = createElementFromTemplate("#login")
-            addElement(login);
-
-            /// Sjekke om vi må legge inn login koder her.
-        }
-
-        function displayMainPage(){
-            let mainPage = createElementFromTemplate("#mainPage")
-            addElement(mainPage);
-           
-        }
-
-        function displaySubmitRequestForm(){
-
-        }
-
-
-</script>
-
-
+<!-- JAVASCRIPT -->
+<script src="script.js" type="application/javascript"></script>
 
 </html>
