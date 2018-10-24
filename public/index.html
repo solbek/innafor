@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <title>#INNAFOR</title>
+    <title>INNAFOR</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- GOOGLEFONTS -->
@@ -57,13 +57,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#">Hjem</a>
+                    <a onclick="displayMainPage()">Hjem</a>
                 </li>
                 <li>
-                    <a href="#">Si ifra</a>
+                    <a onclick="displayFormPage()">Bli kontaktet</a>
                 </li>
                 <li>
-                    <a href="#">Kontakt meg</a>
+                    <a onclick="displayContactPage()">Kontakt meg</a>
                 </li>
                 <li>
                     <a href="#">Fremgang</a>
@@ -159,43 +159,34 @@
                     <p class="mainPageButtonTxt">Si ifra</p>
                 </div>
                 <div class="col-4">
-                    <a href="kontakt_trener.html">
-                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayContactPage()">
                             <i class="fas fa-2x fa-hands-helping"></i>
                         </button>
-                        <p class="mainPageButtonTxt">Kontakt meg</p>
-                    </a>
+                        <p class="mainPageButtonTxt">Bli kontaktet</p>
                 </div>
                 <div class="col-4">
-                    <button type="button" class="btn btn-light btn-circle btn-xl">
+                    <button type="button" class="btn btn-light btn-circle btn-xl" >
                         <i class="fas fa-2x fa-chart-pie"></i>
                     </button>
                     <p class="mainPageButtonTxt">Fremgang</p>
                 </div>
                 <div class="col-4">
-                    <a href="jerv_iframe.html">
-                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayJervIframe()">
                             <img src="/img/jerv_logo.png">
                         </button>
                         <p class="mainPageButtonTxt">Jerv.no</p>
-
-                    </a>
                 </div>
                 <div class="col-4">
-                    <a href="snakkommobbing_iframe.html">
-                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displaySOMIframe()">
                             <img src="/img/snakk_om_mobbing_logo.png">
                         </button>
                         <p class="mainPageButtonTxt">SOM.no</p>
-                    </a>
                 </div>
                 <div class="col-4">
-                    <a href="profil.html">
-                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayProfile()">
                             <i class="fas fa-2x fa-user"></i>
                         </button>
                         <p class="mainPageButtonTxt">Profil</p>
-                    </a>
                 </div>
             </div>
         </div>
@@ -284,6 +275,22 @@
             </div>
         </div>
     </template>
+    
+    <template id="contactPage">
+        <h1>Contact page</h1>
+    </template>
+    
+    <template id="jervIframe">
+        <h1>Jerv iframe</h1>
+    </template>
+    
+    <template id="SOMIframe">
+        <h1>Snakkommobbing iframe</h1>
+    </template>
+    
+    <template id="profile">
+        <h1>Profil</h1>
+    </template>
 
 </body>
 <!-- JAVASCRIPT -->
@@ -303,7 +310,7 @@
             theme: "minimal"
         });
 
-        $('#dismiss, .overlay').on('click', function() {
+        $('#dismiss, .overlay, .components').on('click', function() {
             $('#sidebar').removeClass('active');
             $('.overlay').removeClass('active');
         });

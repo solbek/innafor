@@ -49,7 +49,7 @@ function loggInn() {
 // DISPLAYKONTROLL -------------------------------------------------
 
 // LOGIN USIKKER
-let loggedIn = true;
+let loggedIn = false;
 // -------
 
 if (loggedIn){
@@ -105,4 +105,28 @@ function displayFormPage(){
     clearScreen();
     let formPage = createElementFromTemplate("#formPage")
     addElement(formPage);
+}
+
+function displayContactPage() {
+    clearScreen();
+    let contactPage = createElementFromTemplate("#contactPage")
+    addElement(contactPage);
+}
+
+function displayJervIframe() {
+    clearScreen();
+    let jervIframe = createElementFromTemplate("#jervIframe")
+    addElement(jervIframe);
+}
+
+function displaySOMIframe() {
+    clearScreen();
+    let SOMIframe = createElementFromTemplate("#SOMIframe")
+    addElement(SOMIframe);
+}
+
+function displayProfile() {
+    clearScreen();
+    let jervProfile = createElementFromTemplate("#profile")
+    addElement(jervProfile);
 }
