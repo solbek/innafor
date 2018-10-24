@@ -3,8 +3,9 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>#INNAFOR - Login</title>
+    <meta charset="utf-8">
+    <title>#INNAFOR</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- GOOGLEFONTS -->
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,600,700,700i,900" rel="stylesheet">
@@ -12,14 +13,15 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-    <!-- BOOTSTRAP -->
+    <!-- BOOTSTRAP CSS CDN-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style3.css">
 
     <!-- MINE STYLES -->
-    <link rel="stylesheet" href="stylesMain.css">
-    <link rel="stylesheet" href="stylesIndex.css">
-    <link rel="stylesheet" href="stylesForside.css">
+    <link rel="stylesheet" href="css/stylesMain.css">
 
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
@@ -43,30 +45,79 @@
 </head>
 
 <body>
-    <div id="content"></div>
-
-    <!--
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">#INNAFOR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+    
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-arrow-left white"></i>
+            </div>
+            <div class="sidebar-header">
+                <img id="sidebar-image" src="img/innafor_logo_midl.png">
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#">Hjem</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li>
+                    <a href="#">Si ifra</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li>
+                    <a href="#">Kontakt meg</a>
+                </li>
+                <li>
+                    <a href="#">Fremgang</a>
+                </li>
+                <li>
+                    <a href="#">Jerv.no</a>
+                </li>
+                <li>
+                    <a href="#">Snakkommobbing.no</a>
+                </li>
+                <li>
+                    <a href="#">Profil</a>
                 </li>
             </ul>
-        </div>
-    </nav>
--->
+        </nav>
+        <!-- Page Content  -->
+        <div id="content">
 
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-light">
+                        <i class="fas fa-bars" ></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div class="overlay"></div>
+    </div>
+
+    <div id="container"></div>
+
+    <template id="navbar">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+
+    </template>
 
     <template id="login">
         <!-- LOGO -->
@@ -90,7 +141,7 @@
 
     <template id="mainPage">
         <!-- LOGO -->
-        <div class="container title">
+        <div class="container form-container">
             <div class="row">
                 <div class="col-12">
                     <img class="mainlogo" src="img/innafor_logo_midl.png">
@@ -102,33 +153,31 @@
         <div class="container btn-board">
             <div class="row">
                 <div class="col-4">
-                    <a href="skjema.html">
-                        <button type="button" class="btn btn-light btn-circle btn-xl">
-                            <i class="fas fa-2x fa-thumbs-up"></i>
-                        </button>
-                        <h3>Si ifra</h3>
-                    </a>
+                    <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayFormPage()">
+                        <i class="fas fa-2x fa-thumbs-up"></i>
+                    </button>
+                    <p class="mainPageButtonTxt">Si ifra</p>
                 </div>
                 <div class="col-4">
                     <a href="kontakt_trener.html">
                         <button type="button" class="btn btn-light btn-circle btn-xl">
                             <i class="fas fa-2x fa-hands-helping"></i>
                         </button>
-                        <h3>Kontakt meg</h3>
+                        <p class="mainPageButtonTxt">Kontakt meg</p>
                     </a>
                 </div>
                 <div class="col-4">
                     <button type="button" class="btn btn-light btn-circle btn-xl">
                         <i class="fas fa-2x fa-chart-pie"></i>
                     </button>
-                    <h3>Fremgang</h3>
+                    <p class="mainPageButtonTxt">Fremgang</p>
                 </div>
                 <div class="col-4">
                     <a href="jerv_iframe.html">
                         <button type="button" class="btn btn-light btn-circle btn-xl">
                             <img src="/img/jerv_logo.png">
                         </button>
-                        <h3>Jerv.no</h3>
+                        <p class="mainPageButtonTxt">Jerv.no</p>
 
                     </a>
                 </div>
@@ -137,7 +186,7 @@
                         <button type="button" class="btn btn-light btn-circle btn-xl">
                             <img src="/img/snakk_om_mobbing_logo.png">
                         </button>
-                        <h3>SOM.no</h3>
+                        <p class="mainPageButtonTxt">SOM.no</p>
                     </a>
                 </div>
                 <div class="col-4">
@@ -145,20 +194,129 @@
                         <button type="button" class="btn btn-light btn-circle btn-xl">
                             <i class="fas fa-2x fa-user"></i>
                         </button>
-                        <h3>Profil</h3>
+                        <p class="mainPageButtonTxt">Profil</p>
                     </a>
                 </div>
             </div>
         </div>
     </template>
 
+    <template id="formPage">
+        <!-- TITTEL -->
+        <div class="container title">
+            <div class="row">
+                <div class="col">
+                    <h1>Hvordan går det?</h1>
+                    <p>Du er helt anonym når du svarer på spørsmålene under. Informasjonen brukes til å se gjennomsnittet på laget. </p>
+                </div>
+            </div>
+        </div>
 
+        <!-- SKJEMA -->
+        <div class="container form-container">
+            <div class="row">
+                <div class="col">
+                    <p class="questionTxt">Hvor godt trives du på laget?<p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
 
-
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Hvor godt liker du løpetrening?</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Spørsmål 3</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Spørsmål 4</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Spørsmål 5</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Spørsmål 6</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                    <p class="questionTxt">Spørsmål 7</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
+                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
+                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
+                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
+                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </template>
 
 </body>
-
 <!-- JAVASCRIPT -->
-<script src="script.js" type="application/javascript"></script>
+<script src="js/script.js" type="application/javascript"></script>
+    
+<!-- SIDEBAR SCRIPT --->
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#dismiss, .overlay').on('click', function() {
+            $('#sidebar').removeClass('active');
+            $('.overlay').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').addClass('active');
+            $('.overlay').addClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+
+</script>
+
 
 </html>
