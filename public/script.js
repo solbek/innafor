@@ -48,7 +48,7 @@ function loggInn() {
 
 // DISPLAYKONTROLL -------------------------------------------------
 
-displayLogin();
+displayMainPage();
 
 /*
 (function () {
