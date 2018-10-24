@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="no">
+
 <head>
     <meta charset="utf-8" />
     <title>Hovedside</title>
@@ -19,12 +20,31 @@
     <link rel="stylesheet" href="stylesMain.css">
     <link rel="stylesheet" href="stylesForside.css">
 
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico/favicon-16x16.png">
+    <link rel="manifest" href="favicon.ico/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
 
 
 </head>
 
 <body>
+    <div id="content"></div>
 
     <!--
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -48,73 +68,117 @@
     </nav>
 -->
 
-    <!-- KNAPPER -->
-    <div class="container title">
-        <div class="row">
-            <div class="col-12">
-                <img class="mainlogo" src="img/innafor_logo_midl.png">
+    <template id="mainPage">
+        <!-- LOGO -->
+        <div class="container title">
+            <div class="row">
+                <div class="col-12">
+                    <img class="mainlogo" src="img/innafor_logo_midl.png">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container btn-board">
-        <div class="row">
-            <div class="col-4">
-                <a href="skjema.html">
+        <!-- KNAPPER -->
+        <div class="container btn-board">
+            <div class="row">
+                <div class="col-4">
+                    <a href="skjema.html">
+                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                            <i class="fas fa-2x fa-thumbs-up"></i>
+                        </button>
+                        <h3>Si ifra</h3>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="kontakt_trener.html">
+                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                            <i class="fas fa-2x fa-hands-helping"></i>
+                        </button>
+                        <h3>Kontakt meg</h3>
+                    </a>
+                </div>
+                <div class="col-4">
                     <button type="button" class="btn btn-light btn-circle btn-xl">
-                        <i class="fas fa-2x fa-thumbs-up"></i>
+                        <i class="fas fa-2x fa-chart-pie"></i>
                     </button>
-                    <h3>Si ifra</h3>
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="kontakt_trener.html">
-                    <button type="button" class="btn btn-light btn-circle btn-xl">
-                        <i class="fas fa-2x fa-hands-helping"></i>
-                    </button>
-                    <h3>Kontakt meg</h3>
-                </a>
-            </div>
-            <div class="col-4">
-                <button type="button" class="btn btn-light btn-circle btn-xl">
-                    <i class="fas fa-2x fa-chart-pie"></i>
-                </button>
-                <h3>Fremgang</h3>
-            </div>
-            <div class="col-4">
-                <a href="jerv_iframe.html">
-                    <button type="button" class="btn btn-light btn-circle btn-xl">
-                        <img src="/img/jerv_logo.png">
-                    </button>
-                    <h3>Jerv.no</h3>
+                    <h3>Fremgang</h3>
+                </div>
+                <div class="col-4">
+                    <a href="jerv_iframe.html">
+                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                            <img src="/img/jerv_logo.png">
+                        </button>
+                        <h3>Jerv.no</h3>
 
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="snakkommobbing_iframe.html">
-                    <button type="button" class="btn btn-light btn-circle btn-xl">
-                        <img src="/img/snakk_om_mobbing_logo.png">
-                    </button>
-                    <h3>SOM.no</h3>
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="profil.html">
-                    <button type="button" class="btn btn-light btn-circle btn-xl">
-                        <i class="fas fa-2x fa-user"></i>
-                    </button>
-                    <h3>Profil</h3>
-                </a>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="snakkommobbing_iframe.html">
+                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                            <img src="/img/snakk_om_mobbing_logo.png">
+                        </button>
+                        <h3>SOM.no</h3>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="profil.html">
+                        <button type="button" class="btn btn-light btn-circle btn-xl">
+                            <i class="fas fa-2x fa-user"></i>
+                        </button>
+                        <h3>Profil</h3>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
 </body>
 
 <script>
+    
+    displayMainPage();
+    
+    /*
+    (function () {
+            if (! authenticatedUser) {
+                displayLoginForm();
+            } else{
+                displaySubmitRequestForm();
+            }
+        })();
+    */
+
+        function addElement(element){
+            document.getElementById("content").appendChild(element);
+        }
+
+        function clearScreen(){
+            document.getElementById("content").innerHTML = "";
+        }
+
+        function createElementFromTemplate(templateID){
+            let template = document.querySelector(templateID);
+            let clone = document.importNode(template.content, true);
+            return clone;
+        }
+
+        function displayLogin(){
+            let login = createElementFromTemplate("#login")
+            addElement(login);
+
+            /// Sjekke om vi må legge inn login koder her.
+        }
+
+        function displayMainPage(){
+            let mainPage = createElementFromTemplate("#mainPage")
+            addElement(mainPage);
+           
+        }
+
+        function displaySubmitRequestForm(){
+
+        }
 
 
 </script>
-    
+
 </html>
-
-
