@@ -100,11 +100,11 @@ if (loggedIn){
 */
 
 function addElement(element) {
-    document.getElementById("container").appendChild(element);
+    document.getElementById("templateContainer").appendChild(element);
 }
 
 function clearScreen() {
-    document.getElementById("container").innerHTML = "";
+    document.getElementById("templateContainer").innerHTML = "";
 }
 
 function createElementFromTemplate(templateID) {

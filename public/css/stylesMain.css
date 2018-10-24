@@ -2,7 +2,6 @@
     font-family: sans-serif;
     color: white;
     text-align: center;
-
 }
 
 body {
@@ -16,7 +15,6 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
 }
 
 i {
@@ -49,20 +47,25 @@ h1 {
     height: auto;
     display: block;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 
 .title {
     height: 35vh;
     margin: auto;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
-.btn-board {
+.btn-board, .login-container {
     width: 100%;
     padding: 30px;
     opacity: 0.9;
+}
+
+.login-container input {
+    display: block;
+    margin: 30px auto;
 }
 
 .form-container {
