@@ -16,7 +16,9 @@
         <br>
         <input id="regpassword" placeholder="password" type="password">
         <br>        
-        <input id="regEmail" placeholder="Email">
+        <input id="regFullName" placeholder="FullName">
+        <br>
+        <input id="gruppe" placeholder="Gruppe">
         <br>
         <button id="regBtn" onclick="register()">Logg inn</button>
 
@@ -101,7 +103,8 @@ height: 100%;
 
     let regUsername = document.getElementById("regUsername");
     let regPassword = document.getElementById("regpassword");    
-    let regEmail = document.getElementById("regEmail");
+    let regFullName = document.getElementById("regFullName");
+    let gruppe = document.getElementById("gruppe");
 
     let output = document.getElementById("output");
     
@@ -126,9 +129,11 @@ height: 100%;
     function register() {
 
         let data = {
-            username: regUsername.value,
-            password: regPassword.value,
-            email: regEmail.value
+            brukernavn:regUsername.value,
+            passord:regPassword.value,
+            fullnavn:regFullName.value,
+            gruppe:gruppe.value
+            
         };
 
         sendData("/innafor/users/register", data)

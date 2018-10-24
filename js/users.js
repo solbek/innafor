@@ -6,20 +6,19 @@ const bcrypt = require('bcryptjs');
 
 
 
-
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
-    let query = `SELECT *
-	FROM public."Users" WHERE username = '${username}'`;
-
+    let query = `SELECT * FROM public."brukere" WHERE brukernavn =  '${username}'`;
+    console.log(query);
     try {
         let datarows = await db.any(query);
         console.log(datarows);
         let nameMatch = datarows.length == 1 ? true : false;
         if (nameMatch == true) {
-            let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
-            if (nameMatch, passwordMatch) {
+            let passwordMatch = bcrypt.compareSync(password, datarows[0].passord);
+            if (passwordMatch) {
+                console.log(username)
                 res.status(200).json({
                     mld: "Hello, " + username,
                     username: username
@@ -45,16 +44,17 @@ router.post("/login/", async function (req, res) {
 
 
 router.post("/register/", async function (req, res) {
-    let userEmail = req.body.email;
-    let userName = req.body.username;
-    let password = req.body.password;
-    let hashPassw = bcrypt.hashSync(password, 10);
-    let query = `INSERT INTO public."Users"(
-    email, username, hash)
-	VALUES ('${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+    let brukernavn = req.body.brukernavn;
+    let passord = req.body.passord;
+    let fullnavn = req.body.fullnavn;
+    let gruppe = req.body.gruppe;
+    console.log(req.body);
+    let hashPassw = bcrypt.hashSync(passord, 10);
+    let query = `INSERT INTO "public"."brukere" ("brukerid", "brukernavn", "passord", "fulltnavn", "gruppe") VALUES (DEFAULT, '${brukernavn}', '${hashPassw}', '${fullnavn}', '${gruppe}') RETURNING "brukerid", "brukernavn", "passord", "fulltnavn", "gruppe"`;
 
     try {
         let code = db.any(query) ? 200 : 500;
+        console.log(code);
         res.status(code).json({}).end()
 
     } catch (err) {
@@ -64,6 +64,7 @@ router.post("/register/", async function (req, res) {
     }
 
 });
+
 
 
 

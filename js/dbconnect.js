@@ -1,6 +1,6 @@
 const pgp = require('pg-promise')();
 //db connect string
-const db = pgp('postgres://postgres:@localhost:5432/innafor');
+const db = pgp(process.env.DATABASE_URL);
 
 //prepared sql statements we are going to use
 const PrpSt = require('pg-promise').PreparedStatement;

@@ -1,3 +1,11 @@
+let status;
+
+        (function(){
+            getRefreshedStudentList();
+        })();
+
+
+
 function sendData(endpoint, data) {
     return fetch(endpoint, {
         method: "POST",
@@ -6,10 +14,35 @@ function sendData(endpoint, data) {
         },
         body: JSON.stringify(data)
     }).then(data => {
+        status = data.status;
         return data.json();
     });
 }
 
+
+
+function getData(endpoint, data) {
+    return fetch(endpoint, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(data)
+    }).then(data => {
+        console.log(data);
+    });
+}
+
+function getRefreshedStudentList(){
+    return fetch("/innafor/resultat/getUsers", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+    }).then(data => {
+        console.log(data);
+    });
+        }
 
 
 //Sender inn logginn info for å teste på serveren
@@ -26,10 +59,8 @@ function loggInn() {
 
     sendData("/innafor/users/login", data)
         .then(json => {
-            console.log(json);
-            output.style.color = "white";
             output.innerHTML = json.mld;
-            if (json.status == 200) {
+            if (status == 200) {
                 console.log("yay");
                 displayMainPage();
                 //window.location = json.forside; // Denne linjen bytter html-fil.
