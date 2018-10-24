@@ -31,7 +31,7 @@ function loggInn() {
             output.innerHTML = json.mld;
             if (json.status == 200) {
                 console.log("yay");
-
+                displayMainPage();
                 //window.location = json.forside; // Denne linjen bytter html-fil.
             } else {
                 console.log("ops");
@@ -48,7 +48,15 @@ function loggInn() {
 
 // DISPLAYKONTROLL -------------------------------------------------
 
-displayMainPage();
+// LOGIN USIKKER
+let loggedIn = true;
+// -------
+
+if (loggedIn){
+    displayMainPage();
+}else {
+    displayLogin();
+}
 
 /*
 (function () {
@@ -61,11 +69,11 @@ displayMainPage();
 */
 
 function addElement(element) {
-    document.getElementById("content").appendChild(element);
+    document.getElementById("container").appendChild(element);
 }
 
 function clearScreen() {
-    document.getElementById("content").innerHTML = "";
+    document.getElementById("container").innerHTML = "";
 }
 
 function createElementFromTemplate(templateID) {
@@ -75,6 +83,7 @@ function createElementFromTemplate(templateID) {
 }
 
 function displayLogin() {
+    clearScreen();
     let login = createElementFromTemplate("#login")
     addElement(login);
 
@@ -82,7 +91,18 @@ function displayLogin() {
 }
 
 function displayMainPage() {
+    clearScreen();
     let mainPage = createElementFromTemplate("#mainPage")
     addElement(mainPage);
+}
 
+function displayNavbar() {
+    let navbar = createElementFromTemplate("#navbar")
+    addElement(navbar);
+}
+
+function displayFormPage(){
+    clearScreen();
+    let formPage = createElementFromTemplate("#formPage")
+    addElement(formPage);
 }
