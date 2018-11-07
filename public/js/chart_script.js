@@ -4,6 +4,8 @@ let answers = [
     [4, 2, 5, 3, 4, 4, 1, 2, 3, 4],
     [5, 3, 4, 4, 4, 4, 2, 3, 1, 3],
     [1, 2, 1, 3, 2, 4, 1, 5, 1, 2],
+    [3, 2, 4, 2, 3, 4, 2, 1, 2, 3],
+    [1, 2, 1, 3, 2, 4, 1, 5, 1, 2],
     [3, 2, 4, 2, 3, 4, 2, 1, 2, 3]
 ];
 
@@ -94,21 +96,21 @@ let sortedAnswers = [
     }
 };*/
 
-function sortAnswers() {
+async function sortAnswers() {
     for (let i = 0; i < answers.length; i++) {
         let player = answers[i];
         for (let j = 0; j < player.length; j++) {
             let answer = player[j];
             if (answer == 1) {
-                sortedAnswers[j][1] += 1;
+                sortedAnswers[j][0] += 1;
             } else if (answer == 2) {
-                sortedAnswers[j][2] += 1;
+                sortedAnswers[j][1] += 1;
             } else if (answer == 3) {
-                sortedAnswers[j][3] += 1;
+                sortedAnswers[j][2] += 1;
             } else if (answer == 4) {
-                sortedAnswers[j][4] += 1;
+                sortedAnswers[j][3] += 1;
             } else if (answer == 5) {
-                sortedAnswers[j][5] += 1;
+                sortedAnswers[j][4] += 1;
             }
         }
     }
@@ -144,43 +146,6 @@ Chart.defaults.global.maintainAspectRatio = false;
 
 
 let myChart = new Chart(ctx, {
-    type: 'horizontalBar',
-    data: {
-        labels: ['1', '2', '3', '4', '5'],
-        datasets: [{
-            label: 'Besvarelser',
-            data: averageAnswers,
-            backgroundColor: backgroundColors[0]
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 1,
-                    fontSize: 16,
-                    fontStyle: 'bold'
-                },
-                gridLines: {
-                    display: false,
-                    color: 'rgba(255,255,255,1)'
-                },
-            }],
-            xAxes: [{
-                ticks: {
-                    min: 0
-                },
-                gridLines: {
-                    display: false,
-                    color: 'rgb(255,255,255)'
-                }
-            }]
-        }
-    }
-});
-
-/*let myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: questions,
@@ -214,19 +179,75 @@ let myChart = new Chart(ctx, {
             }]
         }
     }
-});*/
-
+});
+makeCharts();
 
 // FUNCTIONS =========================
 
 function makeCharts() {
     let div = document.createElement("div");
-    div.classList.add("horizontal-chart-container");
     for (let i = 0; i < questions.length; i++) {
         let html = "";
-        let questionTitle = questions[i];
-        html += `<h2>${questionTitle}</h2>`;
-        html += `<canvas id="canvas${i}"><cavnas>`;
-        let
+        html += `<div class="horizontal-chart-container">`;
+        html += `<div class="horizontal-chart-wrapper">`;
+        html += `<canvas id="canvas${i}" class="horizontal-chart"></cavnas>`;
+        html += `</div>`;
+        html += `</div>`;
+
+        div.innerHTML += html;
+    }
+    document.body.appendChild(div);
+    for (let i = 0; i < questions.length; i++) {
+        console.log("Lager canvas " + i);
+        let myCtx = document.getElementById(`canvas${i}`).getContext('2d');
+
+        let myChart = new Chart(myCtx, {
+            type: 'horizontalBar',
+            data: {
+                labels: ['1', '2', '3', '4', '5'],
+                datasets: [{
+                    label: 'Besvarelser',
+                    data: sortedAnswers[i],
+                    backgroundColor: backgroundColors[i]
+        }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: questions[i],
+                    fontSize: 35,
+                    fontColor: 'rgb(25,25,25)'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            fontSize: 16,
+                            fontStyle: 'bold',
+                            fontColor: 'rgb(25,25,25)'
+                        },
+                        gridLines: {
+                            display: false,
+                            color: 'rgba(25,25,25,1)',
+                        },
+            }],
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: answers.length,
+                            stepSize: 1,
+                            fontStyle: 'bold',
+                            fontColor: 'rgb(25,25,25)'
+                        },
+                        gridLines: {
+                            display: false,
+                            color: 'rgb(25,25,25)'
+                        }
+                    }]
+                }
+            }
+        });
+
     }
 }

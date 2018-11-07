@@ -11,6 +11,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
+
 }
 
 a {
@@ -169,6 +170,23 @@ hr {
     margin: 0 auto;
     padding-top: 15vh;
     height: 90vh;
-    width:90vw;
+    width: 80vw;
 }
 
+.horizontal-chart-wrapper {
+    position: relative;
+    height: 200px;
+}
+
+.horizontal-chart-container {
+    display: inline-block;
+    position: relative;
+    margin: 25px auto;
+    padding: 15px;
+    width: 80vw;
+    background: rgba(255,255,255,0.95);
+    background-image: linear-gradient(to bottom right, white, lightgrey);
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
