@@ -1,0 +1,111 @@
+/* ------------------------
+--------- SIDEBAR ---------
+-------------------------*/
+
+.menu-icon {
+    color: white;
+    font-size: 1.5rem;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.back-icon {
+    color: white;
+    font-size: 1.5rem;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.sidebar {
+    background: rgb(65, 166, 219);
+    background-image: linear-gradient(to bottom right, rgb(88, 221, 139), rgb(65, 166, 219));
+    
+    right: -300px;
+    width: 300px;
+    min-height: 100%;
+    position: fixed;
+    z-index: 2;
+
+    overflow: hidden;
+    transition: right 0.5s,
+                box-shadow 0.5s;
+}
+
+.close-menu-icon {
+    color: white;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: right;
+    padding: 20px;
+}
+
+
+
+.sidebar-logo {
+    width: 80%;
+    margin: 0% 20% 10% 10%;
+}
+
+.sidebar-element {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    padding-right: 20px;
+    margin: 1px;
+    transition: background 0.3s, 
+                color 0.3s,
+                box-shadow 0.3s;
+}
+
+.sidebar-element:hover {
+    background: rgb(255,255,255);
+    box-shadow: 0px 5px 8px rgb(46, 117, 154);
+    color: rgb(65, 166, 219);
+}
+
+.sidebar-element:active {
+    background: rgb(255,255,255);
+    box-shadow: 0px 5px 8px rgb(46, 117, 154);
+    color: rgb(65, 166, 219);
+}
+
+.some-container {
+    position: absolute;
+    text-align: center;
+    bottom: 0px;
+    width: 100%;
+    padding: 10%;
+}
+
+.some-icon {
+    color: white;
+    font-size:2rem;
+    padding: 0% 2.5%;
+}
+
+/* Transition */
+.menu-active + .sidebar {
+    right: 0px;
+    min-height: 100%;
+    position: fixed;
+    z-index: 2;
+    box-shadow: -15px 0px 25px rgba(0, 0, 0, 0.2); 
+}
+
+.menu-active + .sidebar + .sidebar-overlay {
+    opacity: 0.6;
+    right: 0%;
+}
+
+.sidebar-overlay {
+    background: rgba(0, 0, 0);
+    opacity: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    transition: opacity 0.5s;
+}

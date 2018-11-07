@@ -79,8 +79,10 @@ function loggInn() {
 
 // DISPLAYKONTROLL -------------------------------------------------
 
+
+
 // LOGIN USIKKER
-let loggedIn = false;
+let loggedIn = true;
 // -------
 
 if (loggedIn){
@@ -117,8 +119,6 @@ function displayLogin() {
     clearScreen();
     let login = createElementFromTemplate("#login")
     addElement(login);
-
-    /// Sjekke om vi må legge inn login koder her.
 }
 
 function displayMainPage() {
@@ -144,20 +144,46 @@ function displayContactPage() {
     addElement(contactPage);
 }
 
-function displayJervIframe() {
-    clearScreen();
-    let jervIframe = createElementFromTemplate("#jervIframe")
-    addElement(jervIframe);
-}
-
-function displaySOMIframe() {
-    clearScreen();
-    let SOMIframe = createElementFromTemplate("#SOMIframe")
-    addElement(SOMIframe);
-}
-
 function displayProfile() {
     clearScreen();
     let jervProfile = createElementFromTemplate("#profile")
     addElement(jervProfile);
 }
+function displayResults() {
+    clearScreen();
+    let results = createElementFromTemplate("#results")
+    addElement(results);
+}
+
+// DISPLAYKONTROLL IFRAME -----------------------------
+
+let iframeOverlay = document.getElementById('iframe-overlay');
+let iframe = document.getElementById("iframe");
+let closeIcon = document.getElementsByClassName("close")[0];
+let btnJerv = document.getElementById("jerv-btn");
+let btnSOM = document.getElementById("snakkommobbing-btn");
+
+btnJerv.onclick = displayJervIframe;
+btnSOM.onclick = displaySOMIframe;
+
+closeIcon.onclick = function () {
+    iframeOverlay.style.display = "none";
+}
+
+window.onclick = function (event) {
+    if (event.target == iframeOverlay) {
+        iframeOverlay.style.display = "none";
+    }
+}
+
+function displayJervIframe() {
+    iframe.src = "http://www.fkjerv.no/";
+    iframeOverlay.style.display = "block";
+}
+
+function displaySOMIframe(){
+    iframe.src = "http://www.snakkommobbing.no/";
+    iframeOverlay.style.display = "block";
+}
+
+
