@@ -5,7 +5,7 @@ const port = (process.env.PORT || 3000);
 
 
 const users = require('./js/users.js');
-const resultat = require('./js/resultat.js');
+const survay = require('./js/survay.js');
 
 
 app.set('port', port);
@@ -21,7 +21,8 @@ app.use(function(req, res, next) {
 
 
 app.use('/innafor/users/', users);
-app.use('/innafor/resultat/', resultat);
+app.use('/innafor/survay/', survay);
+
 
 
 

@@ -3,7 +3,9 @@
 -----------------------------*/
 
 let backIcon = document.querySelector(".back-icon");
-backIcon.onclick = displayMainPage;
+backIcon.onclick = function(){
+    window.location = 'mainPage.html'
+};
 
 let menuIcon = document.querySelector(".menu-icon");
 menuIcon.onclick = toggleSidebar;

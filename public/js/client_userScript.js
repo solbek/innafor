@@ -1,57 +1,46 @@
-let status;
-
-// SEND DATA TO SERVER ============================
-function sendData(endpoint, data) {
-    return fetch(endpoint, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify(data)
-    }).then(data => {
-        status = data.status;
-        return data.json();
-    });
-}
-
-// GET DATA FROM SERVER ============================
-function getData(endpoint, data) {
-    return fetch(endpoint, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify(data)
-    }).then(data => {
-        console.log(data);
-    });
-}
-
 // LOGIN ==========================================
-function loggInn() {
-
-    let loggInnUsername = document.getElementById("logInnUsername");
-    let loggInnpassword = document.getElementById("loggInnpassword");
-    let output = document.getElementById("output");
+async function login() {
 
     let data = {
-        username: loggInnUsername.value,
-        password: loggInnpassword.value
+        username: getId("loginUsername").value,
+        password: getId("loginPassword").value
     };
 
-    sendData("/innafor/users/login", data)
-        .then(json => {
-            output.innerHTML = json.mld;
-            if (status == 200) {
-                console.log("yay");
-                displayMainPage();
-                //window.location = json.forside; // Denne linjen bytter html-fil.
-            } else {
-                console.log("ops");
-            }
-        })
-        .catch(error => {
-            output.innerHTML = error;
-            console.log(error);
-        });
+    let res = await sendData("/innafor/users/login", data)
+    if (res.status == 200) {
+        res = await res.json();
+        localStorage.setItem("token", JSON.stringify(res.token));
+        window.location = 'mainPage.html';
+    } else {
+        res = await res.json();
+        getId("loginOutput").innerHTML = res.feedback;
+    }
+}
+
+
+// REGISTER ==========================================
+///TODO: Skriv in passordet 2 ganger for å registrere
+async function register() {
+
+
+    let data = {
+        brukernavn: getId("regUsername").value,
+        passord: getId("regpassword").value,
+        gruppe: getId("regGruppe").value
+    };
+
+
+    let res = await sendData("/innafor/users/register", data);
+    if (res.status == 200) {
+        res = await res.json();
+        console.log(res);
+        getId("regOutput").innerHTML = res.feedback;
+        localStorage.setItem("token", JSON.stringify(res.token));
+
+
+    } else {
+        res = await res.json();
+        getId("regOutput").innerHTML = res.feedback;
+    }
+
 }

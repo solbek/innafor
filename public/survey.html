@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Survay</title>
+
+
+</head>
+
+<style>
+    #body {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1,
+    h3,
+    p {
+        font-family: sans-serif;
+        color: white;
+    }
+
+    body {
+        background-color: deepskyblue;
+    }
+
+    #survayDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 70vh;
+    }
+
+    .questionsSet{
+        padding-bottom: 5vh;
+    }
+    
+
+    .survayButtons {
+             
+        height: 17vw;
+        width: 17vw;
+
+        border-radius: 50%;
+        font-size: 2vw;
+        border: 0;
+        margin: 1vw 1vw 1vw 1vw;
+        outline: none;
+
+    }
+    
+    .selected{
+        border-style: solid;
+        border-width: 1vw;
+        border-color: darkorchid;
+    }
+
+
+    .scale1 {
+        background-color: #F0412D;
+        color: white;
+    }
+    
+    .scale2 {
+        background-color: #F0822D;
+        color: white;
+    }
+    
+    .scale3 {
+        background-color: #F0F02D;
+        color: white;
+    }
+    
+    .scale4 {
+        background-color: #8FF02D;
+        color: white;
+    }
+    
+    .scale5 {
+        background-color: #34F02D;
+        color: white;
+    }
+    
+    .sendForm{
+        width: 50vw;
+        height: 5vh;
+        
+    }
+    
+
+    
+    
+</style>
+
+
+
+
+<body>
+    <div id="survayDiv">
+        <h1 id="survayTheme"></h1>
+        <p>Du er helt anonym når du svarer på spørsmålene under. Informasjonen brukes til å se gjennomsnittet på laget. </p>
+        <div id="survay"></div>
+        <button class="sendForm" onclick="sendSurvay()">Send</button>
+        <h3 id="survayOutput"></h3>
+
+
+    </div>
+
+</body>
+
+<script src="js/script.js"></script>
+<script src="js/serverRequests.js"></script>
+<script src="js/client_userScript.js"></script>
+<script src="js/survay-script.js"></script>
+<script src="js/client_survayScript.js"></script>
+
+
+
+
+
+</html>

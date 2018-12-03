@@ -16,16 +16,11 @@
     <!-- BOOTSTRAP CSS CDN-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- CHART.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js" type="application/javascript"></script>
 
     <!-- MINE STYLES -->
     <link rel="stylesheet" href="css/stylesMain.css">
-    <link rel="stylesheet" href="css/iframe_styles.css">
-    <link rel="stylesheet" href="css/sidebar_styles.css">
 
-    
+
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
@@ -44,233 +39,36 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    
+
     <!-- PHONEGAP CORDOVA SCRIPT -->
-    <script type="text/javascript" src="cordova.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
 
 </head>
 
 <body>
-    
-    <!-- MENU --------------------------->
-    <i class="fas fa-arrow-left back-icon"></i>
-    <i class="fas fa-bars menu-icon"></i>
-    <div class="sidebar">
-        <i class="fas fa-arrow-right close-menu-icon"></i>
-        <img class="sidebar-logo" src="img/innafor_logo_midl.png">
-        <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
-        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
-        <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
-        <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
-        <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
-        <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Profil</h3>
-        <div class="some-container">
-            <i class="fab fa-facebook some-icon"></i>
-            <i class="fab fa-instagram some-icon"></i>
-        </div>
-    </div>
-    <div class="sidebar-overlay"></div>
-    
-   
-    <!-- TEMPLATE CONTAINER -->
-    <div id="templateContainer"></div>
-    
-    <!-- POPUP IFRAME -->
-     <div id="iframe-overlay">
-        <div class="popup-iframe">
-            <i class="fas fa-times close"></i>
-            <iframe id="iframe"></iframe>
+
+    <!-- LOGO -->
+    <div class="container title">
+        <div class="row">
+            <div class="col-12">
+                <img class="mainlogo" src="img/innafor_logo_midl.png">
+            </div>
         </div>
     </div>
 
-    <!-- TEMPLATES -->
-    <template id="login">
-        <!-- LOGO -->
-        <div class="container title">
-            <div class="row">
-                <div class="col-12">
-                    <img class="mainlogo" src="img/innafor_logo_midl.png">
-                </div>
-            </div>
-        </div>
-
-        <!-- LOGIN FORM -->
-        <div class="login-container">
-            <input id="logInnUsername" class="form-control" placeholder="Brukernavn">
-            <input id="loggInnpassword" class="form-control" placeholder="Passord" type="password">
-            <button id="loggInnBtn" class="btn btn-5" type="button" onclick="loggInn()">Logg inn</button>
-
-            <h3 id="output"></h3>
-        </div>
-    </template>
-
-    <template id="mainPage">
-        <!-- LOGO -->
-        <div class="container title">
-            <div class="row">
-                <div class="col-12">
-                    <img class="mainlogo" src="img/innafor_logo_midl.png">
-                </div>
-            </div>
-        </div>
-
-        <!-- KNAPPER -->
-        <div class="container btn-board">
-            <div class="row">
-                <div class="col-4 col-lg-2">
-                    <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayFormPage()">
-                        <i class="fas fa-2x fa-thumbs-up"></i>
-                    </button>
-                    <p class="mainPageButtonTxt">Si ifra</p>
-                </div>
-                <div class="col-4 col-lg-2">
-                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayContactPage()">
-                            <i class="fas fa-2x fa-hands-helping"></i>
-                        </button>
-                        <p class="mainPageButtonTxt">Bli kontaktet</p>
-                </div>
-                <div class="col-4 col-lg-2">
-                    <button type="button" class="btn btn-light btn-circle btn-xl" >
-                        <i class="fas fa-2x fa-chart-pie"></i>
-                    </button>
-                    <p class="mainPageButtonTxt">Fremgang</p>
-                </div>
-                <div class="col-4 col-lg-2">
-                        <button type="button" class="btn btn-light btn-circle btn-xl" id="jerv-btn">
-                            <img src="img/jerv_logo.png">
-                        </button>
-                        <p class="mainPageButtonTxt">Jerv.no</p>
-                </div>
-                <div class="col-4 col-lg-2">
-                        <button type="button" class="btn btn-light btn-circle btn-xl" id="snakkommobbing-btn">
-                            <img src="img/snakk_om_mobbing_logo.png">
-                        </button>
-                        <p class="mainPageButtonTxt">SOM.no</p>
-                </div>
-                <div class="col-4 col-lg-2">
-                        <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayProfile()">
-                            <i class="fas fa-2x fa-user"></i>
-                        </button>
-                        <p class="mainPageButtonTxt">Profil</p>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="formPage">
-        <!-- TITTEL -->
-        <div class="container title">
-            <div class="row">
-                <div class="col">
-                    <h1>Hvordan går det?</h1>
-                    <p>Du er helt anonym når du svarer på spørsmålene under. Informasjonen brukes til å se gjennomsnittet på laget. </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SKJEMA -->
-        <div class="container form-container">
-            <div class="row">
-                <div class="col">
-                    <p class="questionTxt">Hvor godt trives du på laget?<p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Hvor godt liker du løpetrening?</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Spørsmål 3</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Spørsmål 4</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Spørsmål 5</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Spørsmål 6</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                    <p class="questionTxt">Spørsmål 7</p>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-form btn-1">Veldig dårlig</button>
-                        <button type="button" class="btn btn-form btn-2">Litt dårlig</button>
-                        <button type="button" class="btn btn-form btn-3">Helt greit</button>
-                        <button type="button" class="btn btn-form btn-4">Litt bra</button>
-                        <button type="button" class="btn btn-form btn-5">Veldig bra</button>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-        </div>
-    </template>
-    
-    <template id="contactPage">
-        <h1>Contact page</h1>
-    </template>
-    
-    <template id="jervIframe">
-        <h1>Jerv iframe</h1>
-        <div class="container">
-            <iframe class="iframe" src="http://www.snakkommobbing.no/"></iframe>
-        </div>
-    </template>
-    
-    <template id="SOMIframe">
-        <h1>Snakkommobbing iframe</h1>
-    </template>
-    
-    <template id="profile">
-        <h1>Profil</h1>
-    </template>
-    
-    <template id="results">
-        <div class="container">
-            <canvas id="myChart" width="100%" height="100%"></canvas>
-        </div>
-    </template>
+    <!-- LOGIN FORM -->
+    <div class="login-container">
+        <input id="loginUsername" class="form-control" placeholder="Brukernavn">
+        <input id="loginPassword" class="form-control" placeholder="Passord" type="password">
+        <button id="loginBtn" class="btn btn-5" onclick="login()">Logg inn</button>
+        <h3 id="loginOutput"></h3>
+    </div>
 
 </body>
 <!-- MINE JAVASCRIPT -->
 <script src="js/script.js" type="application/javascript"></script>
-<script src="js/sidebar_script.js" type="application/javascript"></script>
-    <script src="js/chart_script.js" type="application/javascript"></script>
+<script src="js/client_userScript.js" type="application/javascript"></script>
+<script src="js/serverRequests.js" type="application/javascript"></script>
 
 
 

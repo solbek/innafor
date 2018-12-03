@@ -18,13 +18,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CHART.js -->
-    <script src="node_modules/chart.js/dist/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js" type="application/javascript"></script>
 
     <!-- MINE STYLES -->
     <link rel="stylesheet" href="css/stylesMain.css">
     <link rel="stylesheet" href="css/iframe_styles.css">
     <link rel="stylesheet" href="css/sidebar_styles.css">
-    <link rel="stylesheet" href="css/styles_chart.css">
 
 
     <!-- FAVICON -->
@@ -53,10 +52,8 @@
 
 <body>
 
-    <!-- MENU --------------------------->
-    <a href="index.html">
-        <i class="fas fa-arrow-left back-icon"></i>
-    </a>
+    <!-- SIDEBAR MENU --------------------------->
+    <i class="fas fa-arrow-left back-icon"></i>
     <i class="fas fa-bars menu-icon"></i>
     <div class="sidebar">
         <i class="fas fa-arrow-right close-menu-icon"></i>
@@ -74,39 +71,101 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-    <!-- RESULTS --------------------------->
-
-    <div class="container chart-btn-container">
-        <div class="btn-group chart-btn-group">
-            <button type="button" class="btn btn-primary chart-btn" onclick="toggleChartButton(event); makeMonthlyChart()">Denne måneden</button>
-            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeProgressChart()">Fremdrift</button>
-            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeQuestionChart()">Spørsmål</button>
+    <!-- POPUP IFRAME -->
+    <div id="iframe-overlay">
+        <div class="popup-iframe">
+            <i class="fas fa-times close"></i>
+            <iframe id="iframe"></iframe>
         </div>
     </div>
 
-    <div class="chart-container">
+    <!-- LOGO -->
+    <div class="container title">
+        <div class="row">
+            <div class="col-12">
+                <img class="mainlogo" src="img/innafor_logo_midl.png">
+            </div>
+        </div>
     </div>
 
+    <!-- KNAPPER -->
+    <div class="container btn-board">
+        <div class="row">
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayFormPage()">
+                    <i class="fas fa-2x fa-thumbs-up"></i>
+                </button>
+                <p class="mainPageButtonTxt">Si ifra</p>
+            </div>
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayContactPage()">
+                    <i class="fas fa-2x fa-hands-helping"></i>
+                </button>
+                <p class="mainPageButtonTxt">Bli kontaktet</p>
+            </div>
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl">
+                    <i class="fas fa-2x fa-chart-pie"></i>
+                </button>
+                <p class="mainPageButtonTxt">Fremgang</p>
+            </div>
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl" id="jerv-btn">
+                    <img src="img/jerv_logo.png">
+                </button>
+                <p class="mainPageButtonTxt">Jerv.no</p>
+            </div>
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl" id="snakkommobbing-btn">
+                    <img src="img/snakk_om_mobbing_logo.png">
+                </button>
+                <p class="mainPageButtonTxt">SOM.no</p>
+            </div>
+            <div class="col-4 col-lg-2">
+                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayProfile()">
+                    <i class="fas fa-2x fa-user"></i>
+                </button>
+                <p class="mainPageButtonTxt">Profil</p>
+            </div>
+        </div>
+    </div>
 
 </body>
 <!-- MINE JAVASCRIPT -->
 <script src="js/script.js" type="application/javascript"></script>
 <script src="js/sidebar_script.js" type="application/javascript"></script>
-<script src="js/chart_script.js" type="application/javascript"></script>
 
 <script>
-    function toggleChartButton(evt) {
-        let numberOfBtns = document.querySelector(".chart-btn-group").children;
-        for (let i = 0; i < numberOfBtns.length; i++) {
-            numberOfBtns[i].classList.remove("btn-primary");
-            numberOfBtns[i].classList.add("btn-secondary");
-        }
-        evt.currentTarget.classList.add("btn-primary");
-        evt.currentTarget.classList.remove("btn-secondary");
-    }
-    
-</script>
+    // DISPLAYKONTROLL IFRAME -----------------------------
+    let iframeOverlay = document.getElementById('iframe-overlay');
+    let iframe = document.getElementById("iframe");
+    let closeIcon = document.getElementsByClassName("close")[0];
+    let btnJerv = document.getElementById("jerv-btn");
+    let btnSOM = document.getElementById("snakkommobbing-btn");
 
+    btnJerv.onclick = displayJervIframe;
+    btnSOM.onclick = displaySOMIframe;
+    closeIcon.onclick = function() {
+        iframeOverlay.style.display = "none";
+    }
+
+
+    window.onclick = function(event) {
+        if (event.target == iframeOverlay) {
+            iframeOverlay.style.display = "none";
+        }
+    }
+
+    function displayJervIframe() {
+        iframe.src = "http://www.fkjerv.no/";
+        iframeOverlay.style.display = "block";
+    }
+
+    function displaySOMIframe() {
+        iframe.src = "http://www.snakkommobbing.no/";
+        iframeOverlay.style.display = "block";
+    }
+</script>
 
 
 

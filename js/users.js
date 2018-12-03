@@ -1,35 +1,54 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const db = require('./dbconnect').db; //database
+
+const db = require('./dbconnect').db;
+const prpSql = require('./dbconnect').prpSql;
+
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+
+const secret = process.env.SECRET;
 
 
 
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
-    let query = `SELECT * FROM public."brukere" WHERE brukernavn =  '${username}'`;
-    console.log(query);
+   
     try {
-        let datarows = await db.any(query);
-        console.log(datarows);
-        let nameMatch = datarows.length == 1 ? true : false;
-        if (nameMatch == true) {
-            let passwordMatch = bcrypt.compareSync(password, datarows[0].passord);
-            if (passwordMatch) {
-                console.log(username)
-                res.status(200).json({
-                    mld: "Hello, " + username,
-                    username: username
-                });
-            }
-        } else {
-            res.status(401).json({
-                mld: "Feil brukernavn eller passord"
+        let hash = "";
+        let usrCheck = await findUser(username);
+        
+        if (usrCheck){
+            hash = usrCheck.hash;
+        }
+        
+        let passwordCheck = await bcrypt.compare(password, hash);
+    
+        if (findUser && passwordCheck) {
+
+            let payload = {
+                userID: usrCheck.userid,
+                role: usrCheck.role,
+                gruppe: usrCheck.gruppe
+            };
+            let tok = jwt.sign(payload, secret, {
+                expiresIn: "12h"
             });
+            res.status(200).json({
+                token: tok
+            }).end();
+
+        } else {
+            res.status(400).json({
+                feedback: "Feil brukernavn eller passord"
+            }).end();
 
         }
+
+
+
     } catch (err) {
         res.status(500).json({
             error: err
@@ -45,17 +64,39 @@ router.post("/login/", async function (req, res) {
 
 router.post("/register/", async function (req, res) {
     let brukernavn = req.body.brukernavn;
-    let passord = req.body.passord;
-    let fullnavn = req.body.fullnavn;
     let gruppe = req.body.gruppe;
-    console.log(req.body);
-    let hashPassw = bcrypt.hashSync(passord, 10);
-    let query = `INSERT INTO "public"."brukere" ("brukerid", "brukernavn", "passord", "fulltnavn", "gruppe") VALUES (DEFAULT, '${brukernavn}', '${hashPassw}', '${fullnavn}', '${gruppe}') RETURNING "brukerid", "brukernavn", "passord", "fulltnavn", "gruppe"`;
+    let passord = req.body.passord;
+    let hash = bcrypt.hashSync(passord, 10);
+
+
+    let regUserQuery = prpSql.regUser;
+    regUserQuery.values = [brukernavn, hash, gruppe];
 
     try {
-        let code = db.any(query) ? 200 : 500;
-        console.log(code);
-        res.status(code).json({}).end()
+
+        let check = await findUser(brukernavn);
+
+        if (check) {
+            res.status(400).json({
+                feedback: "Brukernavn er opptatt",
+            }).end();
+
+        } else {
+            let regUser = await db.any(regUserQuery);
+            let payload = {
+                userID: regUser[0].userid,
+                role: regUser[0].role,
+                gruppe: regUser[0].gruppe,
+            };
+            console.log(payload);
+            let tok = jwt.sign(payload, secret, {
+                expiresIn: "12h"
+            });
+            res.status(200).json({
+                feedback: "Bruker registrert",
+                token: tok,
+            }).end();
+        }
 
     } catch (err) {
         res.status(500).json({
@@ -66,66 +107,28 @@ router.post("/register/", async function (req, res) {
 });
 
 
+async function findUser(brukernavn) {
 
-
-
-router.post("/changePass/", async function (req, res) {
-
-    let changePass = req.body;
-
-    //let sql = `SELECT * FROM users WHERE loginname='${login.username}'`;
-
+    let findUser = prpSql.findUser;
+    findUser.values = [brukernavn];
 
     try {
-
-        let datarows = await db.any(sql);
-
-        console.log(datarows);
-
-
-        if (datarows.length <= 0) {
-            res.status(401).send("Feil brukernavn eller passord");
-            return;
-
+        let findUsername = await db.any(findUser);
+        if (findUsername.length !== 0) {
+            return findUsername[0];
         }
 
-        let user = await datarows.find(user => {
-            return login.username === user.loginname;
-        });
-
-
-        let passwordMatch = await bcrypt.compareSync(login.password, user.password);
-
-
-        if (user && passwordMatch) {
-            //we have a valid user -> create the token        
-            let payload = {
-                username: datarows.loginname,
-                fullname: datarows.fullname
-            };
-            let tok = await jwt.sign(payload, secret, {
-                expiresIn: "12h"
-            });
-
-            //send logininfo + token to the client
-            res.status(200).json({
-                username: user.loginname,
-                fullname: user.fullname,
-                token: tok
-            });
-
-        } else {
-            res.status(401).send("Feil brukernavn eller passord");
-        }
+        return false;
 
     } catch (err) {
         res.status(500).json({
             error: err
-        }); //something went wrong!
+        }); //something went wrong!     
     }
 
+}
 
-});
+
 
 
 

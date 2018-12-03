@@ -5,13 +5,12 @@
 }
 
 body {
-    background: #ff6868;
+    background: #b94343;
     background-image: url("../img/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-
 }
 
 a {
@@ -34,13 +33,6 @@ img {
 h1 {
     font-size: 2em;
     font-weight: bold;
-}
-
-.mainPageButtonTxt {
-    padding-top: 10px;
-    font-size: 0.8em;
-    text-align: center;
-    color: white;
 }
 
 .mainlogo {
@@ -159,34 +151,4 @@ hr {
     width: 100%;
     height: 100vh;
 
-}
-
-/* -------------------------
----------- CHART -----------
---------------------------*/
-
-.chart-container {
-    position: relative;
-    margin: 0 auto;
-    padding-top: 15vh;
-    height: 90vh;
-    width: 80vw;
-}
-
-.horizontal-chart-wrapper {
-    position: relative;
-    height: 200px;
-}
-
-.horizontal-chart-container {
-    display: inline-block;
-    position: relative;
-    margin: 25px auto;
-    padding: 15px;
-    width: 80vw;
-    background: rgba(255,255,255,0.95);
-    background-image: linear-gradient(to bottom right, white, lightgrey);
-    border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
-    box-sizing: border-box;
 }

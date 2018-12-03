@@ -1,106 +1,131 @@
-let ctx = document.getElementById("myChart").getContext('2d');
-
-let answers = [
-    [4, 2, 5, 3, 4, 4, 1, 2, 3, 4],
-    [5, 3, 4, 4, 4, 4, 2, 3, 1, 3],
-    [1, 2, 1, 3, 2, 4, 1, 5, 1, 2],
-    [3, 2, 4, 2, 3, 4, 2, 1, 2, 3],
-    [1, 2, 1, 3, 2, 4, 1, 5, 1, 2],
-    [3, 2, 4, 2, 3, 4, 2, 1, 2, 3]
-];
-
-//Sorterte svar - Første array representerer første spørsmål.
-//Om array[0][0] = 3 betyr det at 3 besvarte spørsmål 1 med 1.
-let sortedAnswers = [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]];
-
-/*let sortedAnswers = {
-    question1: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
+// HVA VI FÅR FRA SERVEREN =======================
+let datarows = [
+    {
+        besvarelse: [
+            {
+                question: "Spm1",
+                answer: "3",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm2",
+                answer: "3",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm3",
+                answer: "3",
+                tag: "treningsinnhold"
+            }
+        ]
     },
-    question2: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
+    {
+        besvarelse: [
+            {
+                question: "Spm1",
+                answer: "3",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm2",
+                answer: "4",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm3",
+                answer: "2",
+                tag: "treningsinnhold"
+            }
+        ]
     },
-    question3: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
+    {
+        besvarelse: [
+            {
+                question: "Spm1",
+                answer: "2",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm2",
+                answer: "5",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm3",
+                answer: "3",
+                tag: "treningsinnhold"
+            }
+        ]
     },
-    question4: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question5: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question6: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question7: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question8: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question9: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
-    },
-    question10: {
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0
+    {
+        besvarelse: [
+            {
+                question: "Spm1",
+                answer: "5",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm2",
+                answer: "5",
+                tag: "trivsel"
+            },
+            {
+                question: "Spm3",
+                answer: "5",
+                tag: "treningsinnhold"
+            }
+        ]
     }
-};*/
+]
 
-async function sortAnswers() {
+// ARRAYS ========================================
+let answers = []; // [[spiller1 svar1, spiller1 svar2],[spiller2 svar1, spiller2 svar2] ...]
+let questions = []; // [Spørsmål1, spørsmål2 ...]
+let averageAnswers = []; // [snitt av svar på spm1, snitt av svar på spm2 ...]
+let tags = []; // [Trivsel, Treningsinnhold ...]
+let averageAnswersByTags = []; // [Snitt av alle avgAnsw med trivseltag, Snitt av alle avgAnsw med treningsinnholdtag,]
+let sortedAnswers = []; // Om array[0][0] = 3 betyr det at 3 besvarte spørsmål 1 med 1.
+
+
+// FUNCTIONS =====================================
+function makeAnswersArray() {
+    for (let i = 0; i < datarows.length; i++) {
+        let enBesvarelse = datarows[i].besvarelse;
+        answers.push([]);
+        for (let j = 0; j < enBesvarelse.length; j++) {
+            answers[i].push(enBesvarelse[j].answer);
+        }
+    }
+}
+
+function makeQuestionsArray() {
+    let enBesvarelse = datarows[0].besvarelse;
+    for (let j = 0; j < enBesvarelse.length; j++) {
+        questions.push(enBesvarelse[j].question);
+    }
+}
+
+function makeTagsArray() {
+    let enBesvarelse = datarows[0].besvarelse;
+    for (let j = 0; j < enBesvarelse.length; j++) {
+        if (!tags.includes(enBesvarelse[j].tag)) {
+            tags.push(enBesvarelse[j].tag);
+        }
+    }
+}
+
+function sortAnswers() {
+    for (let k = 0; k < datarows[0].besvarelse.length; k++) {
+        sortedAnswers.push([0, 0, 0, 0, 0]);
+    }
+
+    ///TODO: Sjekk array.filter
     for (let i = 0; i < answers.length; i++) {
-        let player = answers[i];
-        for (let j = 0; j < player.length; j++) {
-            let answer = player[j];
+        let enBesvarelse = datarows[i].besvarelse;
+
+
+        for (let j = 0; j < enBesvarelse.length; j++) {
+            let answer = enBesvarelse[j].answer;
             if (answer == 1) {
                 sortedAnswers[j][0] += 1;
             } else if (answer == 2) {
@@ -115,11 +140,56 @@ async function sortAnswers() {
         }
     }
 }
-sortAnswers();
-console.log(sortedAnswers);
 
-let questions = ["Spm 1", "Spm 2", "Spm 3", "Spm 4", "Spm 5", "Spm 6", "Spm 7", "Spm 8", "Spm 9", "Spm 10"];
-let averageAnswers = [5, 3, 3, 1, 2, 3, 2, 4, 4, 5];
+function makeAverageAnswersArray() {
+    let utgangspunkt = [];
+    for (let k = 0; k < answers[0].length; k++) {
+        utgangspunkt.push([]);
+        for (let j = 0; j < answers.length; j++) {
+            utgangspunkt[k].push(answers[j][k]);
+        }
+    }
+    for (let i = 0; i < utgangspunkt.length; i++) {
+        averageAnswers.push(findAverage(utgangspunkt[i]));
+    }
+}
+
+function makeAverageAnswersTagsArray() {
+    let utgangspunkt = [];
+    for (let k = 0; k < answers[0].length; k++) {
+        utgangspunkt.push([]);
+        for (let j = 0; j < answers.length; j++) {
+            utgangspunkt[k].push(answers[j][k]);
+        }
+    }
+    for (let i = 0; i < utgangspunkt.length; i++) {
+        averageAnswers.push(findAverage(utgangspunkt[i]));
+    }
+}
+
+function makeAvarageAnswersTagsArray() {
+    for (let i = 0; i < tags.length; i++) {
+        let utgangspunkt = [];
+        for (let j = 0; j < averageAnswers.length; j++) {
+            let tag = datarows[0].besvarelse[j].tag;
+            if (tag == tags[i]) {
+                utgangspunkt.push(averageAnswers[j]);
+            }
+        }
+        averageAnswersByTags.push(findAverage(utgangspunkt));
+    }
+}
+
+function findAverage(arguments) {
+    let total = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        total += parseInt(arguments[i]);
+    }
+    return (total / (arguments.length));
+}
+
+
+// BAR COLORS -------------------------
 let backgroundColors = [
     'rgba(255, 206, 86, 0.8)',
     'rgba(75, 192, 192, 0.8)',
@@ -144,59 +214,129 @@ Chart.defaults.global.defaultFontColor = '#ffffff';
 Chart.defaults.global.legend.display = false;
 Chart.defaults.global.maintainAspectRatio = false;
 
-
-let myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: questions,
-        datasets: [{
-            label: 'Gj.sitt',
-            data: averageAnswers,
-            backgroundColor: backgroundColors
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 5,
-                    min: 0,
-                    stepSize: 1,
-                    fontSize: 16,
-                    fontStyle: 'bold'
-                },
-                gridLines: {
-                    display: false,
-                    color: 'rgba(255,255,255,1)'
-                },
-            }],
-            xAxes: [{
-                gridLines: {
-                    display: false,
-                    color: 'rgb(255,255,255)'
-                }
-            }]
-        }
-    }
-});
-makeCharts();
-
 // FUNCTIONS =========================
 
-function makeCharts() {
+function makeMonthlyChart() {
+    let container = document.querySelector(".chart-container");
+    container.innerHTML = "";
+    let myCanvas = document.createElement("canvas");
+    container.appendChild(myCanvas);
+    let ctx = myCanvas.getContext('2d');
+
+
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: tags,
+            datasets: [{
+                data: averageAnswersByTags,
+                backgroundColor: backgroundColors
+        }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: 5,
+                        min: 0,
+                        stepSize: 1,
+                        fontSize: 16,
+                        fontStyle: 'bold'
+                    },
+                    gridLines: {
+                        display: false,
+                        color: 'rgba(255,255,255,1)'
+                    },
+            }],
+                xAxes: [{
+                    ticks: {
+                        fontSize: 16,
+                        fontStyle: 'bold'
+                    },
+                    gridLines: {
+                        display: false,
+                        color: 'rgb(255,255,255)'
+                    }
+            }]
+            }
+        }
+    });
+}
+
+function makeProgressChart() {
+    let container = document.querySelector(".chart-container");
+    container.innerHTML = "";
+    let myCanvas = document.createElement("canvas");
+    container.appendChild(myCanvas);
+    let ctx = myCanvas.getContext('2d');
+
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Desember", "Januar", "Februar"],
+            datasets: [{
+                    label: tags[0],
+                    data: [averageAnswersByTags[0], 5, 4],
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    borderColor: backgroundColors[0],
+                    borderWidth: 5
+            },
+                {
+                    label: tags[1],
+                    data: [averageAnswersByTags[1], 2, 3],
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    borderColor: backgroundColors[1],
+                    borderWidth: 5
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: 5,
+                        min: 0,
+                        stepSize: 1,
+                        fontSize: 16,
+                        fontStyle: 'bold'
+                    },
+                    gridLines: {
+                        display: false,
+                        color: 'rgba(255,255,255,1)'
+                    },
+            }],
+                xAxes: [{
+                    ticks: {
+                        fontSize: 12,
+                        fontStyle: 'bold'
+                    },
+                    gridLines: {
+                        display: false,
+                        color: 'rgb(255,255,255)'
+                    }
+            }]
+            }
+        }
+    });
+
+}
+
+function makeQuestionChart() {
+    let container = document.querySelector(".chart-container");
+    container.innerHTML = "";
     let div = document.createElement("div");
     for (let i = 0; i < questions.length; i++) {
         let html = "";
         html += `<div class="horizontal-chart-container">`;
         html += `<div class="horizontal-chart-wrapper">`;
-        html += `<canvas id="canvas${i}" class="horizontal-chart"></cavnas>`;
+        html += `<canvas id="canvas${i}" class="horizontal-chart"></canvas>`;
         html += `</div>`;
         html += `</div>`;
 
         div.innerHTML += html;
     }
-    document.body.appendChild(div);
+    container.appendChild(div);
     for (let i = 0; i < questions.length; i++) {
         console.log("Lager canvas " + i);
         let myCtx = document.getElementById(`canvas${i}`).getContext('2d');
@@ -250,4 +390,23 @@ function makeCharts() {
         });
 
     }
+}
+
+// ============================================
+// INIT =======================================
+// ============================================
+init();
+
+async function init() {
+    await makeAnswersArray();
+    await makeQuestionsArray();
+    await makeTagsArray();
+    await sortAnswers();
+    await makeAverageAnswersArray();
+    await makeAvarageAnswersTagsArray();
+
+    //console.log(tags);
+    //console.log(averageAnswersByTags);
+
+    await makeMonthlyChart();
 }
