@@ -68,64 +68,16 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-    <!-- POPUP IFRAME -->
-    <div id="iframe-overlay">
-        <div class="popup-iframe">
-            <i class="fas fa-times close"></i>
-            <iframe id="iframe"></iframe>
-        </div>
-    </div>
+    <!--ENDRE PASSORD: NYTT FRA HENRIK. TRENGER STYLE -->
+    <h3>Endre passord</h3>
+    <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password">
+    <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password">
+    <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password">
+    <button id="loginBtn" onclick="updatePassword()">Endre passord</button>
+    <h3 id="userUpdateOutput"></h3>
 
-    <!-- LOGO -->
-    <div class="container title">
-        <div class="row">
-            <div class="col-12">
-                <img class="mainlogo" src="img/innafor_logo_midl.png">
-            </div>
-        </div>
-    </div>
 
-    <!-- KNAPPER -->
-    <div class="container btn-board">
-        <div class="row">
-            <div class="col-4 col-lg-2">
-                <button id="formPage" type="button" class="btn btn-light btn-circle btn-xl" onclick="displayFormPage()">
-                    <i class="fas fa-2x fa-thumbs-up"></i>
-                </button>
-                <p id="formPageBtnTxt" class="mainPageButtonTxt">Si ifra</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayContactPage()">
-                    <i class="fas fa-2x fa-hands-helping"></i>
-                </button>
-                <p class="mainPageButtonTxt">Bli kontaktet</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl">
-                    <i class="fas fa-2x fa-chart-pie"></i>
-                </button>
-                <p class="mainPageButtonTxt">Fremgang</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" id="jerv-btn">
-                    <img src="img/jerv_logo.png">
-                </button>
-                <p class="mainPageButtonTxt">Jerv.no</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" id="snakkommobbing-btn">
-                    <img src="img/snakk_om_mobbing_logo.png">
-                </button>
-                <p class="mainPageButtonTxt">SOM.no</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayProfile()">
-                    <i class="fas fa-2x fa-user"></i>
-                </button>
-                <p class="mainPageButtonTxt">Profil</p>
-            </div>
-        </div>
-    </div>
+
 
 </body>
 <!-- MINE JAVASCRIPT -->
@@ -136,53 +88,12 @@
 <script src="js/client_survayScript.js"></script>
 
 <script>
-    // DISPLAYKONTROLL IFRAME -----------------------------
-    let iframeOverlay = document.getElementById('iframe-overlay');
-    let iframe = document.getElementById("iframe");
-    let closeIcon = document.getElementsByClassName("close")[0];
-    let btnJerv = document.getElementById("jerv-btn");
-    let btnSOM = document.getElementById("snakkommobbing-btn");
-
-    btnJerv.onclick = displayJervIframe;
-    btnSOM.onclick = displaySOMIframe;
-    closeIcon.onclick = function() {
-        iframeOverlay.style.display = "none";
-    }
-
-
-    window.onclick = function(event) {
-        if (event.target == iframeOverlay) {
-            iframeOverlay.style.display = "none";
-        }
-    }
-
-    function displayJervIframe() {
-        iframe.src = "http://www.fkjerv.no/";
-        iframeOverlay.style.display = "block";
-    }
-
-    function displaySOMIframe() {
-        iframe.src = "http://www.snakkommobbing.no/";
-        iframeOverlay.style.display = "block";
-    }
-
-
     (async function() {
-            let checkToken = await verifyToken();
-            if (checkToken.status !== 200) {
-                window.location = '/';
-                return;
-            }
-           checkToken = await checkToken.json();
-           if(checkToken.role == "trener"){
-                console.log(checkToken.role);
-                getId("formPage").onclick = displayResultPage
-                getId("formPageBtnTxt").innerHTML= "Resultater"
-           }else{
-                console.log(checkToken.role);
-               getId("formPage").onclick = displayFormPage
-               getId("formPageBtnTxt").innerHTML= "Si ifra"
-           }
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
 
     })();
 </script>

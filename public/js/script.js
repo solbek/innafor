@@ -27,4 +27,9 @@ function displayFormPage() {
 function displayResultPage() {
     window.location = 'chart.html';
 }
+
+
+function displayProfile() {
+    window.location = 'profil.html';
+}
 // ====================================
