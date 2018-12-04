@@ -74,6 +74,14 @@ h1 {
     height: 60vh;
 }
 
+.update-password-container {
+    margin: auto;
+    margin-bottom: 50px;
+    width: 80vw;
+}
+
+
+
 .btn-board,
 .login-container {
     width: 100%;

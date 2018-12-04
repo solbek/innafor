@@ -56,7 +56,7 @@ async function verifyToken() {
     return res;
 };
 
-// REGISTER ==========================================
+// Update password ==========================================
 async function changePassword(){
     
     let data = {
@@ -64,8 +64,12 @@ async function changePassword(){
         newPassword: getId("newPassword").value,
         newPasswordRep: get("newPasswordRep").value,
         token: localstorage.getItem("token")
-    }
-    
-    
-    
+    }    
 }
+
+// Logout ==========================================
+async function logout(){
+    
+    localStorage.removeItem("token");
+    window.location = "/";
+    }

@@ -68,14 +68,31 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-    <!--ENDRE PASSORD: NYTT FRA HENRIK. TRENGER STYLE -->
-    <h3>Endre passord</h3>
-    <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password">
-    <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password">
-    <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password">
-    <button id="loginBtn" onclick="updatePassword()">Endre passord</button>
-    <h3 id="userUpdateOutput"></h3>
+    <!-- POPUP IFRAME -->
+    <div id="iframe-overlay">
+        <div class="popup-iframe">
+            <i class="fas fa-times close"></i>
+            <iframe id="iframe"></iframe>
+        </div>
+    </div>
 
+    <!-- HEADER -->
+    <div class="header-container"></div>
+
+    <!--ENDRE PASSORD: NYTT FRA HENRIK. TRENGER STYLE -->
+
+    <div class="update-password-container">
+        <h1>Endre passord</h1>
+        <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password">
+        <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password">
+        <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password">
+        <button id="updatePasswordBtn" class="btn btn-send" onclick="updatePassword()">Endre passord</button>
+        <h3 id="userUpdateOutput"></h3>
+    </div>
+    <div class="logout-container">
+        
+        <button id="logoutBtn" class="btn btn-send" onclick="logout()">Logg ut</button>
+    </div>
 
 
 
@@ -96,6 +113,7 @@
         }
 
     })();
+
 </script>
 
 

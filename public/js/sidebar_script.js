@@ -1,11 +1,16 @@
 /*-----------------------------
 ---------- SIDEBAR ------------
 -----------------------------*/
-
-let backIcon = document.querySelector(".back-icon");
-backIcon.onclick = function(){
-    window.location = 'mainPage.html'
-};
+console.log(window.location);
+if (window.location.pathname == '/mainPage.html') {
+    let backIcon = document.querySelector(".back-icon");
+    backIcon.style.display = "none";
+} else {
+    let backIcon = document.querySelector(".back-icon");
+    backIcon.onclick = function () {
+        window.location = 'mainPage.html'
+    };
+}
 
 let menuIcon = document.querySelector(".menu-icon");
 menuIcon.onclick = toggleSidebar;
