@@ -49,7 +49,7 @@ async function checkTimeStamp() {
     let timestamp = `W${date[0]}-M${date[1]}-Y${date[2]}`
 
     let data = {
-        token: JSON.parse(localStorage.getItem("token")),
+        token: localStorage.getItem("token"),
         timestamp: timestamp
     };
 

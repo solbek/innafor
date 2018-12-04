@@ -5,7 +5,7 @@ let url = 'https://innafor.herokuapp.com';
 
 // SEND DATA TO SERVER ============================
 function sendData(endpoint, data) {
-    return fetch((url+endpoint), {
+    return fetch(endpoint, {
         method: "POST",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -18,7 +18,7 @@ function sendData(endpoint, data) {
 
 // GET DATA FROM SERVER ============================
 function getData(endpoint, data) {
-    return fetch((url+endpoint), {
+    return fetch(endpoint, {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
