@@ -9,7 +9,7 @@ async function login() {
     let res = await sendData("/innafor/users/login", data)
     if (res.status == 200) {
         res = await res.json();
-        localStorage.setItem("token", JSON.stringify(res.token));
+        localStorage.setItem("token",res.token);
         window.location = 'mainPage.html';
     } else {
         res = await res.json();
@@ -35,7 +35,7 @@ async function register() {
         res = await res.json();
         console.log(res);
         getId("regOutput").innerHTML = res.feedback;
-        localStorage.setItem("token", JSON.stringify(res.token));
+        localStorage.setItem("token", res.token);
 
 
     } else {
@@ -49,10 +49,23 @@ async function register() {
 
 async function verifyToken() {
     let data = {
-        token: JSON.parse(localStorage.getItem("token"))
+        token:localStorage.getItem("token")
     };
     
     let res = await sendData("/innafor/users/verifyToken", data);
     return res;
 };
 
+// REGISTER ==========================================
+async function changePassword(){
+    
+    let data = {
+        oldPassword: getId("oldPassword").value,
+        newPassword: getId("newPassword").value,
+        newPasswordRep: get("newPasswordRep").value,
+        token: localstorage.getItem("token")
+    }
+    
+    
+    
+}

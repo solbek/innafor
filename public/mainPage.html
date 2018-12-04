@@ -171,20 +171,23 @@
 
     // INIT -----------------------------
     (async function() {
-        let checkToken = await verifyToken();
-        if (checkToken.status !== 200) {
-            window.location = '/';
-            return;
-        }
-        checkToken = await checkToken.json();
-        if (checkToken.role == "trener") {
-            getId("formPage").onclick = displayResultPage
-            getId("formPageBtnTxt").innerHTML = "Resultater"
-        } else {
-            console.log("bruker")
-            getId("formPage").onclick = displayFormPage
-            getId("formPageBtnTxt").innerHTML = "Si ifra"
-        }
+
+            let checkToken = await verifyToken();
+            if (checkToken.status !== 200) {
+                window.location = '/';
+                return;
+            }
+           checkToken = await checkToken.json();
+           if(checkToken.role == "trener"){
+                console.log(checkToken.role);
+                getId("formPage").onclick = displayResultPage
+                getId("formPageBtnTxt").innerHTML= "Resultater"
+           }else{
+                console.log(checkToken.role);
+               getId("formPage").onclick = displayFormPage
+               getId("formPageBtnTxt").innerHTML= "Si ifra"
+           }
+
 
     })();
 

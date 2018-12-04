@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Index</title>
-    
-    
+    <title>Create User</title>
+
+
 </head>
 
 <body>
@@ -15,60 +15,60 @@
         <input id="regUsername" placeholder="username">
         <br>
         <input id="regpassword" placeholder="password" type="password">
-        <br>        
-        <input id="regFullName" placeholder="FullName">
         <br>
-        <input id="gruppe" placeholder="Gruppe">
+        <select id="regGruppe">
+            <option value="G13">Gutter 13</option>
+            <option value="G14">Gutter 14</option>
+        </select>
         <br>
-        <button id="regBtn" onclick="register()">Logg inn</button>
+        <button id="regBtn" onclick="register()">Registrer</button>
 
-        <h3 id="output"></h3>
+        <h3 id="regOutput"></h3>
     </div>
-        
+
 
 </body>
-    
+
 <style>
-    
-    
-#body {
-width: 100%;
-height: 100%;
-}
-    
-    h1, h3{
-       font-family: sans-serif; 
-        color: white;
-        
+    #body {
+        width: 100%;
+        height: 100%;
     }
-    
-    body{
-        background-color:deepskyblue;
+
+    h1,
+    h3 {
+        font-family: sans-serif;
+        color: white;
 
     }
-    
-    #RegDiv{
-        
+
+    body {
+        background-color: deepskyblue;
+
+    }
+
+    #RegDiv {
+
         display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 70vh;
-        
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 70vh;
+
     }
-    
-    
-    #loggInnBtn:focus{
+
+
+    #loggInnBtn:focus {
         outline: none;
-        
+
     }
-    
-    input{
+
+    input {
         height: 20px;
     }
-    
-    #loggInnBtn {        
+
+    #loggInnBtn {
         border: 0px;
         width: 150px;
         height: 50px;
@@ -79,82 +79,25 @@ height: 100%;
         font-family: sans-serif;
         font-size: 14pt;
         font-weight: bold;
-        border-radius:  25px;
+        border-radius: 25px;
         text-align: center;
         cursor: pointer;
         user-select: none;
         transition: transform 0.2s;
-    } 
-    
-    #loggInnBtn:hover {
-        transform:  scale(1.1, 1.1);
     }
-    
-    #loggInnBtn:active{
+
+    #loggInnBtn:hover {
+        transform: scale(1.1, 1.1);
+    }
+
+    #loggInnBtn:active {
         background: gray;
     }
-    
-    
-    
-    
 </style>
-    
-<script>
 
-    let regUsername = document.getElementById("regUsername");
-    let regPassword = document.getElementById("regpassword");    
-    let regFullName = document.getElementById("regFullName");
-    let gruppe = document.getElementById("gruppe");
+<script src="js/script.js"></script>
+<script src="js/serverRequests.js"></script>
+<script src="js/client_userScript.js"></script>
 
-    let output = document.getElementById("output");
-    
-    
-    
-  
-    function sendData(endpoint, data) {
-        return fetch(endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(data)
-        }).then(data => {
-            return data.json();
-        });
-    }
-
-
-
-    //Sender inn logginn info for å teste på serveren
-    function register() {
-
-        let data = {
-            brukernavn:regUsername.value,
-            passord:regPassword.value,
-            fullnavn:regFullName.value,
-            gruppe:gruppe.value
-            
-        };
-
-        sendData("/innafor/users/register", data)
-            .then(json => {
-                output.style.color = "white";
-                output.innerHTML = "Bruker registrert";
-            })
-            .catch(error => {
-                output.style.color = "red";
-                output.innerHTML = "error";
-                console.log(error);
-            });
-
-
-
-    }
-
-
-
-</script>
-    
-    
 
 </html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta charset="utf-8">
+    <title>INNAFOR</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- GOOGLEFONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,600,700,700i,900" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP CSS CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- MINE STYLES -->
+    <link rel="stylesheet" href="css/stylesMain.css">
+    <link rel="stylesheet" href="css/iframe_styles.css">
+    <link rel="stylesheet" href="css/sidebar_styles.css">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico/favicon-16x16.png">
+    <link rel="manifest" href="favicon.ico/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- PHONEGAP CORDOVA SCRIPT -->
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR MENU --------------------------->
+    <i class="fas fa-arrow-left back-icon"></i>
+    <i class="fas fa-bars menu-icon"></i>
+    <div class="sidebar">
+        <i class="fas fa-arrow-right close-menu-icon"></i>
+        <img class="sidebar-logo" src="img/innafor_logo_midl.png">
+        <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
+        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
+        <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
+        <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
+        <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
+        <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Profil</h3>
+        <div class="some-container">
+            <i class="fab fa-facebook some-icon"></i>
+            <i class="fab fa-instagram some-icon"></i>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
+
+    <!--ENDRE PASSORD: NYTT FRA HENRIK. TRENGER STYLE -->
+    <h3>Endre passord</h3>
+    <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password">
+    <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password">
+    <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password">
+    <button id="loginBtn" onclick="updatePassword()">Endre passord</button>
+    <h3 id="userUpdateOutput"></h3>
+
+
+
+
+</body>
+<!-- MINE JAVASCRIPT -->
+<script src="js/script.js" type="application/javascript"></script>
+<script src="js/sidebar_script.js" type="application/javascript"></script>
+<script src="js/serverRequests.js"></script>
+<script src="js/client_userScript.js"></script>
+<script src="js/client_survayScript.js"></script>
+
+<script>
+    (async function() {
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
+
+    })();
+</script>
+
+
+
+</html>

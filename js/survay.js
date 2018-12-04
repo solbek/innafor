@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const prpSql = require('./dbconnect').prpSql;
 
 const jwt = require("jsonwebtoken");
+const authorize = require("./auth.js");
 
 const secret = process.env.SECRET;
 

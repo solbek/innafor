@@ -31,11 +31,11 @@ function displayResultPage() {
     window.location = 'chart.html';
 }
 
+
+function displayProfile() {
+    window.location = 'profil.html';
+
 function displayContactPage() {
     window.location = "contact.html";
 }
 
-function displayProfile() {
-    window.location = "profil.html";
-}
-// ====================================
