@@ -11,7 +11,7 @@ prpSql.regUser = new PrpSt('regUser',`INSERT INTO "public"."brukere" ("userid", 
 prpSql.findUser = new PrpSt('findUser', `SELECT * FROM "public"."brukere" WHERE brukernavn = $1`);
 
 //Survay---------------
-prpSql.sendAnswers = new PrpSt('sendAnswers', `INSERT INTO "public"."survayresults" ("id", "surveyresult", "timestamp", "gruppe") VALUES (DEFAULT, $1, $2, $3)`);
+prpSql.sendAnswers = new PrpSt('sendAnswers', `INSERT INTO "public"."survayresults" ("id", "results", "timestamp", "gruppe") VALUES (DEFAULT, $1, $2, $3)`);
 
 prpSql.participate  = new PrpSt('participate', `INSERT INTO "public"."participants" ("id", "userid", "timestamp") VALUES (DEFAULT, $1, $2)`);
 

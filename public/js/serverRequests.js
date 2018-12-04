@@ -13,15 +13,13 @@ function sendData(endpoint, data) {
 }
 
 // GET DATA FROM SERVER ============================
-function getData(endpoint, data) {
+function getData(endpoint) {
     return fetch(endpoint, {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify(data)
-    }).then(data => {
-        console.log(data);
+            "x-access-auth": localStorage.getItem("token")
+        }     
     });
 }
 

@@ -42,21 +42,19 @@ async function register() {
         res = await res.json();
         getId("regOutput").innerHTML = res.feedback;
     }
-
 };
 
 
 
 async function verifyToken() {
-    let data = {
-        token:localStorage.getItem("token")
-    };
-    
-    let res = await sendData("/innafor/users/verifyToken", data);
+    let res = await getData("/innafor/users/verifyToken");
     return res;
 };
 
-// REGISTER ==========================================
+
+
+
+// USER SETTINGS ==========================================
 async function changePassword(){
     
     let data = {
