@@ -67,10 +67,21 @@
 </body>
 <!-- MINE JAVASCRIPT -->
 <script src="js/script.js" type="application/javascript"></script>
-<script src="js/client_userScript.js" type="application/javascript"></script>
-<script src="js/serverRequests.js" type="application/javascript"></script>
+<script src="js/serverRequests.js"></script>
+<script src="js/client_userScript.js"></script>
+<script src="js/client_survayScript.js"></script>
 
-
+<script>
+    
+    (async function() {
+        let checkToken = await verifyToken();
+        if(checkToken.status == 200){
+            window.location = 'mainPage.html';
+        }
+        
+    })();    
+    
+</script>
 
 
 </html>

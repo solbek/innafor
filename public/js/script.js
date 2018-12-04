@@ -22,4 +22,9 @@ if (loggedIn) {
 function displayFormPage() {
     window.location = 'survey.html';
 }
+
+
+function displayResultPage() {
+    window.location = 'chart.html';
+}
 // ====================================
