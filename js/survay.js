@@ -37,7 +37,31 @@ router.use(function (req, res, next) {
     next();
 });
 
+router.post("/checkTimeStamp/", async function (req, res) {
 
+    let token = req.body.token;
+    let timestamp = req.body.timestamp;
+    let userInfo = await getPayload(token);
+
+    try {
+        let check = await checkTimestamp(userInfo.UserID, timestamp);
+
+        if (check) {
+            res.status(400).json({
+                feedback: "Du har allerede deltatt denne uken",
+            }).end();
+        } else {
+            res.status(200).json({
+                feedback: "Du kan delta i undersøkelsen",
+            }).end();
+
+        }
+    } catch (err) {
+        res.status(500).json({
+            error: err
+        }); //something went wrong!     
+    }
+});
 
 router.post("/answersIn/", async function (req, res) {
 
@@ -51,25 +75,25 @@ router.post("/answersIn/", async function (req, res) {
 
     let participate = prpSql.participate;
     participate.values = [userInfo.UserID, timestamp];
-    
+
 
     try {
 
-      
+
         let check = await checkTimestamp(userInfo.UserID, timestamp);
-        
-        if (check){
+
+        if (check) {
             res.status(400).json({
-                feedback: "Du har allerede deltat denne uken",
+                feedback: "Du har allerede deltatt denne uken",
             }).end();
-        }else{
+        } else {
 
-        let answerIn = await db.any(sendAnswers);
-        let writeParticipate = await db.any(participate);
+            let answerIn = await db.any(sendAnswers);
+            let writeParticipate = await db.any(participate);
 
-        res.status(200).json({
-            feedback: "Undersøkelse er sendt",
-        }).end();
+            res.status(200).json({
+                feedback: "Undersøkelse er sendt",
+            }).end();
 
         }
     } catch (err) {
@@ -87,21 +111,20 @@ async function checkTimestamp(userID, timestamp) {
 
     let checkParticipant = prpSql.checkParticipant;
     checkParticipant.values = [userID];
-    
+
     try {
         let check = await db.any(checkParticipant);
-        
+
         let checkTimestamps = check.find(checkTimestamps => {
             return timestamp === checkTimestamps.timestamp;
         });
-        
-        if(checkTimestamps){
+
+        if (checkTimestamps) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
-        
+
     } catch (err) {
         res.status(500).json({
             error: err

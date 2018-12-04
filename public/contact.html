@@ -67,10 +67,13 @@
         </div>
     </div>
     <div class="sidebar-overlay"></div>
-    
-    <div class="underutviling-text">
-        <h2>Denne siden er under utvikling og kommer i fremtiden.</h2>
-    
+
+    <!-- HEADER -->
+    <div class="header-container"></div>
+
+    <!-- CONTACT TEXT -->
+    <div class="contact-container">
+        <p class="development-text">Denne siden er under utvikling og kommer i fremtiden.</p>
     </div>
 
 
@@ -81,26 +84,18 @@
 <script src="js/sidebar_script.js" type="application/javascript"></script>
 <script src="js/serverRequests.js"></script>
 <script src="js/client_userScript.js"></script>
-<script src="js/client_survayScript.js"></script>
 
 <script>
+    
+    // INIT ------------
     (async function() {
-            let checkToken = await verifyToken();
-            if (checkToken.status !== 200) {
-                window.location = '/';
-                return;
-            }
-           checkToken = await checkToken.json();
-           if(checkToken.role == "trener"){
-                getId("formPage").onclick = displayResultPage
-                getId("formPageBtnTxt").innerHTML= "Resultater"
-           }else{
-               console.log("bruker")
-               getId("formPage").onclick = displayFormPage
-               getId("formPageBtnTxt").innerHTML= "Si ifra"
-           }
-
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
     })();
+
 </script>
 
 

@@ -88,6 +88,13 @@
     </div>
 
     <!-- SURVEY -->
+    <div class="survey-overlay">
+        <h1 class="survey-overlay-message"></h1>
+        <p class="survey-overlay-countdown"></p>
+        <progress value="0" max="5" id="progressBar"></progress>
+    </div>
+    
+    <!-- SURVEY -->
     <div class="container survey-container">
         <div class="row">
             <div class="col">
@@ -101,13 +108,23 @@
 </body>
 
 <script src="js/script.js"></script>
-<script src="js/serverRequests.js"></script>
+<script src="js/sidebar_script.js"></script>
 <script src="js/client_userScript.js"></script>
+<script src="js/serverRequests.js"></script>
 <script src="js/survay-script.js"></script>
 <script src="js/client_survayScript.js"></script>
-
-
-
-
+    
+    <script>
+        // INIT ------------
+    (async function() {
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
+        checkTimeStamp();
+        
+    })();
+    </script>
 
 </html>
