@@ -71,5 +71,5 @@ async function changePassword(){
 async function logout(){
     
     localStorage.removeItem("token");
-    window.location = "/";
+    window.location = "index.html";
     }
