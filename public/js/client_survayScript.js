@@ -80,6 +80,7 @@ function countdownAndRedirect(res) {
         if (timeleft == -1) {
             clearInterval(downloadTimer);
             window.location = '/mainPage.html';
+
         }
     }, 1000);
 

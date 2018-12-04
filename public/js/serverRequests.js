@@ -1,3 +1,7 @@
+let url = 'https://innafor.herokuapp.com';
+
+// (url+endpoint)
+
 
 // SEND DATA TO SERVER ============================
 function sendData(endpoint, data) {

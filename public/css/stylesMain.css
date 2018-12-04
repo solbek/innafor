@@ -52,7 +52,7 @@ h1 {
 }
 
 .mainpage-title {
-    height: 35vh;
+    height: 30vh;
     margin: auto;
 }
 
@@ -69,6 +69,18 @@ h1 {
     font-size: 2em;
     font-weight: bold;
 }
+
+.btn-board {
+    height: 60vh;
+}
+
+.update-password-container {
+    margin: auto;
+    margin-bottom: 50px;
+    width: 80vw;
+}
+
+
 
 .btn-board,
 .login-container {
