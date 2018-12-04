@@ -15,7 +15,7 @@ async function login() {
         res = await res.json();
         getId("loginOutput").innerHTML = res.feedback;
     }
-}
+};
 
 
 // REGISTER ==========================================
@@ -43,4 +43,16 @@ async function register() {
         getId("regOutput").innerHTML = res.feedback;
     }
 
-}
+};
+
+
+
+async function verifyToken() {
+    let data = {
+        token: JSON.parse(localStorage.getItem("token"))
+    };
+    
+    let res = await sendData("/innafor/users/verifyToken", data);
+    return res;
+};
+

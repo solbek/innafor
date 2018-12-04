@@ -58,8 +58,8 @@
 
     <!-- LOGIN FORM -->
     <div class="login-container">
-        <input id="loginUsername" class="form-control" placeholder="Brukernavn">
-        <input id="loginPassword" class="form-control" placeholder="Passord" type="password">
+        <input id="loginUsername" class="form-control" autocorrect="off" autocapitalize="none" placeholder="Brukernavn">
+        <input id="loginPassword" class="form-control" autocorrect="off" autocapitalize="none" placeholder="Passord" type="password">
         <button id="loginBtn" class="btn btn-5" onclick="login()">Logg inn</button>
         <h3 id="loginOutput"></h3>
     </div>
@@ -67,10 +67,21 @@
 </body>
 <!-- MINE JAVASCRIPT -->
 <script src="js/script.js" type="application/javascript"></script>
-<script src="js/client_userScript.js" type="application/javascript"></script>
-<script src="js/serverRequests.js" type="application/javascript"></script>
+<script src="js/serverRequests.js"></script>
+<script src="js/client_userScript.js"></script>
+<script src="js/client_survayScript.js"></script>
 
-
+<script>
+    
+    (async function() {
+        let checkToken = await verifyToken();
+        if(checkToken.status == 200){
+            window.location = 'mainPage.html';
+        }
+        
+    })();    
+    
+</script>
 
 
 </html>

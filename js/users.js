@@ -12,6 +12,9 @@ const secret = process.env.SECRET;
 
 
 
+
+
+
 router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
@@ -105,6 +108,52 @@ router.post("/register/", async function (req, res) {
     }
 
 });
+
+
+
+
+router.post("/verifyToken/", async function (req, res) {
+
+    let token = req.body.token;
+    if (!token) {
+        res.status(403).json({
+            msg: "No token received"
+        }); //send
+        console.log("no token recived");
+        return; //quit
+    } else {
+        try {
+            
+        let userInfo = await getPayload(token)
+        
+        res.status(200).json({
+            role: userInfo.role,
+        });
+            
+        } catch (err) {
+            res.status(403).json({
+                msg: "The token is not valid!"
+            });
+            console.log("the token is not valid!");
+            return;
+        }
+    }
+
+});
+
+
+async function getPayload(token) {
+    let decoded = jwt.verify(token, secret);
+
+    let payload = {
+        UserID: decoded.userID,
+        gruppe: decoded.gruppe,
+        role: decoded.role
+    }
+
+    return payload;
+}
+
 
 
 async function findUser(brukernavn) {
