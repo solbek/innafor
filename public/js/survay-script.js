@@ -33,33 +33,34 @@ function createSurvay(array) {
         let questionSet = document.createElement("div");
         //let answersSet = document.createElement("div");
 
-        let question = `<h3>${array[i].question}</h3>`
+        let question = `<hr><p class="questionTxt">${array[i].question}</p>`
 
         for (let j = 0; j < 5; j++) {
             let scale = j + 1
             let scaleText;
 
             if (scale == 1) {
-                scaleText = "Veldig dårlig"
+                scaleText = `Veldig<br>dårlig`
             }
             if (scale == 2) {
-                scaleText = "Litt dårlig"
+                scaleText = `Litt<br>dårlig`
             }
             if (scale == 3) {
-                scaleText = "Helt greit"
+                scaleText = `Helt<br>greit`
             }
             if (scale == 4) {
-                scaleText = "Litt bra"
+                scaleText = `Litt<br>bra`
             }
             if (scale == 5) {
-                scaleText = "Veldig bra"
+                scaleText = `Veldig<br>bra`
             }
 
-            let answers = `<button class="scale${scale} survayButtons buttonRow${i}" onclick="select(${scale},${i})">${scaleText}</button>`
+            let answers = `<button class="buttonRow${i} btn-form btn-${scale}" onclick="select(${scale},${i})">${scaleText}</button>`
             question += answers;
         }
 
         questionSet.className = "questionsSet";
+        questionSet.id = `questionsSet${i}`;
         questionSet.innerHTML = question;
         survay.appendChild(questionSet);
     }

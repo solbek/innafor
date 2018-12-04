@@ -2,124 +2,129 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Survay</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta charset="utf-8">
+    <title>INNAFOR</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- GOOGLEFONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,600,700,700i,900" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP CSS CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- MINE STYLES -->
+    <link rel="stylesheet" href="css/stylesMain.css">
+    <link rel="stylesheet" href="css/iframe_styles.css">
+    <link rel="stylesheet" href="css/sidebar_styles.css">
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico/favicon-16x16.png">
+    <link rel="manifest" href="favicon.ico/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- PHONEGAP CORDOVA SCRIPT -->
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
 
 </head>
 
-<style>
-    #body {
-        width: 100%;
-        height: 100%;
-    }
-
-    h1,
-    h3,
-    p {
-        font-family: sans-serif;
-        color: white;
-    }
-
-    body {
-        background-color: deepskyblue;
-    }
-
-    #survayDiv {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 70vh;
-    }
-
-    .questionsSet{
-        padding-bottom: 5vh;
-    }
-    
-
-    .survayButtons {
-             
-        height: 17vw;
-        width: 17vw;
-
-        border-radius: 50%;
-        font-size: 2vw;
-        border: 0;
-        margin: 1vw 1vw 1vw 1vw;
-        outline: none;
-
-    }
-    
-    .selected{
-        border-style: solid;
-        border-width: 1vw;
-        border-color: darkorchid;
-    }
-
-
-    .scale1 {
-        background-color: #F0412D;
-        color: white;
-    }
-    
-    .scale2 {
-        background-color: #F0822D;
-        color: white;
-    }
-    
-    .scale3 {
-        background-color: #F0F02D;
-        color: white;
-    }
-    
-    .scale4 {
-        background-color: #8FF02D;
-        color: white;
-    }
-    
-    .scale5 {
-        background-color: #34F02D;
-        color: white;
-    }
-    
-    .sendForm{
-        width: 50vw;
-        height: 5vh;
-        
-    }
-    
-
-    
-    
-</style>
-
-
-
-
 <body>
-    <div id="survayDiv">
-        <h1 id="survayTheme"></h1>
-        <p>Du er helt anonym når du svarer på spørsmålene under. Informasjonen brukes til å se gjennomsnittet på laget. </p>
-        <div id="survay"></div>
-        <button class="sendForm" onclick="sendSurvay()">Send</button>
-        <h3 id="survayOutput"></h3>
+    <!-- SIDEBAR MENU --------------------------->
+    <i class="fas fa-arrow-left back-icon"></i>
+    <i class="fas fa-bars menu-icon"></i>
+    <div class="sidebar">
+        <i class="fas fa-arrow-right close-menu-icon"></i>
+        <img class="sidebar-logo" src="img/innafor_logo_midl.png">
+        <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
+        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
+        <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
+        <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
+        <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
+        <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Profil</h3>
+        <div class="some-container">
+            <i class="fab fa-facebook some-icon"></i>
+            <i class="fab fa-instagram some-icon"></i>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
 
+    <!-- POPUP IFRAME -->
+    <div id="iframe-overlay">
+        <div class="popup-iframe">
+            <i class="fas fa-times close"></i>
+            <iframe id="iframe"></iframe>
+        </div>
+    </div>
 
+    <!-- HEADER -->
+    <div class="header-container"></div>
+
+    <!-- SURVEY TITLE -->
+    <div class="container title survey-title">
+        <div class="row">
+            <div class="col">
+                <h1>Hvordan går det?</h1>
+                <p>Du er helt anonym når du svarer på spørsmålene under. Informasjonen brukes til å se gjennomsnittet på laget. </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SURVEY -->
+    <div class="survey-overlay">
+        <h1 class="survey-overlay-message"></h1>
+        <p class="survey-overlay-countdown"></p>
+        <progress value="0" max="5" id="progressBar"></progress>
+    </div>
+    
+    <!-- SURVEY -->
+    <div class="container survey-container">
+        <div class="row">
+            <div class="col">
+                <div id="survay"></div>
+                <button class="btn btn-send" onclick="sendSurvay()">Send</button>
+                <h3 id="survayOutput"></h3>
+            </div>
+        </div>
     </div>
 
 </body>
 
 <script src="js/script.js"></script>
-<script src="js/serverRequests.js"></script>
+<script src="js/sidebar_script.js"></script>
 <script src="js/client_userScript.js"></script>
+<script src="js/serverRequests.js"></script>
 <script src="js/survay-script.js"></script>
 <script src="js/client_survayScript.js"></script>
-
-
-
-
+    
+    <script>
+        // INIT ------------
+    (async function() {
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
+        checkTimeStamp();
+        
+    })();
+    </script>
 
 </html>

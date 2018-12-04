@@ -3,6 +3,10 @@ function getId(id) {
     return document.getElementById(id);
 }
 
+function getClass(cl) {
+    return document.getElementsByClassName(cl);
+}
+
 /*
 // LOGIN ==============================
 let loggedIn = false;//localStorage.getItem('token');
@@ -23,7 +27,6 @@ function displayFormPage() {
     window.location = 'survey.html';
 }
 
-
 function displayResultPage() {
     window.location = 'chart.html';
 }
@@ -31,5 +34,8 @@ function displayResultPage() {
 
 function displayProfile() {
     window.location = 'profil.html';
+
+function displayContactPage() {
+    window.location = "contact.html";
 }
-// ====================================
+

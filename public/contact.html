@@ -19,6 +19,8 @@
 
     <!-- MINE STYLES -->
     <link rel="stylesheet" href="css/stylesMain.css">
+    <link rel="stylesheet" href="css/iframe_styles.css">
+    <link rel="stylesheet" href="css/sidebar_styles.css">
 
 
     <!-- FAVICON -->
@@ -47,41 +49,55 @@
 
 <body>
 
-    <!-- LOGO -->
-    <div class="container title">
-        <div class="row">
-            <div class="col-12">
-                <img class="mainlogo" src="img/innafor_logo_midl.png">
-            </div>
+    <!-- SIDEBAR MENU --------------------------->
+    <i class="fas fa-arrow-left back-icon"></i>
+    <i class="fas fa-bars menu-icon"></i>
+    <div class="sidebar">
+        <i class="fas fa-arrow-right close-menu-icon"></i>
+        <img class="sidebar-logo" src="img/innafor_logo_midl.png">
+        <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
+        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
+        <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
+        <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
+        <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
+        <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Profil</h3>
+        <div class="some-container">
+            <i class="fab fa-facebook some-icon"></i>
+            <i class="fab fa-instagram some-icon"></i>
         </div>
     </div>
+    <div class="sidebar-overlay"></div>
 
-    <!-- LOGIN FORM -->
-    <div class="login-container">
-        <input id="loginUsername" class="form-control" autocorrect="off" autocapitalize="none" placeholder="Brukernavn">
-        <input id="loginPassword" class="form-control" autocorrect="off" autocapitalize="none" placeholder="Passord" type="password">
-        <button id="loginBtn" class="btn btn-5" onclick="login()">Logg inn</button>
-        <h3 id="loginOutput"></h3>
+    <!-- HEADER -->
+    <div class="header-container"></div>
+
+    <!-- CONTACT TEXT -->
+    <div class="contact-container">
+        <p class="development-text">Denne siden er under utvikling og kommer i fremtiden.</p>
     </div>
+
+
 
 </body>
 <!-- MINE JAVASCRIPT -->
 <script src="js/script.js" type="application/javascript"></script>
+<script src="js/sidebar_script.js" type="application/javascript"></script>
 <script src="js/serverRequests.js"></script>
 <script src="js/client_userScript.js"></script>
-<script src="js/client_survayScript.js"></script>
 
 <script>
     
+    // INIT ------------
     (async function() {
         let checkToken = await verifyToken();
-        if(checkToken.status == 200){
-            window.location = 'mainPage.html';
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
         }
-        
-    })();    
-    
+    })();
+
 </script>
+
 
 
 </html>

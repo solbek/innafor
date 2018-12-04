@@ -18,9 +18,6 @@ function getTimeStamp(d) {
 
 
 
-
-
-
 ///TODO: Gi brukeren tibakemelding at skjemaet er sendt, og hvis de allerede har svart denne uka. Kanskje legge over et grått filter til å indikere at den ikke er tilgjenlig med en tidtaker som vil si ifra når man kan svare igjen.
 async function sendSurvay() {
 
@@ -34,7 +31,7 @@ async function sendSurvay() {
     };
 
     let res = await sendData("/innafor/survay/answersIn", data);
-    
+
     if (res.status == 200) {
         res = await res.json();
         getId("survayOutput").innerHTML = res.feedback;
@@ -45,3 +42,45 @@ async function sendSurvay() {
     }
 
 };
+
+async function checkTimeStamp() {
+
+    let date = getTimeStamp(new Date());
+    let timestamp = `W${date[0]}-M${date[1]}-Y${date[2]}`
+
+    let data = {
+        token: JSON.parse(localStorage.getItem("token")),
+        timestamp: timestamp
+    };
+
+    let res = await sendData("/innafor/survay/checkTimeStamp", data);
+
+    if (res.status !== 200) {
+        res = await res.json();
+        getId("survayOutput").innerHTML = res.feedback;
+        document.querySelector(".survey-overlay").classList.add("active");
+
+        document.querySelector(".survey-overlay-message").innerHTML = res.feedback;
+        console.log(res.feedback);
+        countdownAndRedirect(res);
+    }
+
+};
+
+function countdownAndRedirect(res) {
+    let text = document.querySelector(".survey-overlay-countdown");
+    let progressbar = document.getElementById("progressBar");
+
+    var timeleft = 5;
+    var downloadTimer = setInterval(function () {
+        text.innerHTML = `Du blir sendt til hovedsiden om ${timeleft} sekunder...`;
+        progressbar.value = timeleft;
+        
+        timeleft--;
+        if (timeleft == -1) {
+            clearInterval(downloadTimer);
+            window.location = '/';
+        }
+    }, 1000);
+
+}
