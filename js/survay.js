@@ -12,7 +12,7 @@ const authorize = require("./auth.js");
 const secret = process.env.SECRET;
 
 
-
+/*
 
 router.use(function (req, res, next) {
 
@@ -36,16 +36,15 @@ router.use(function (req, res, next) {
     }
 
     next();
-});
+});*/
 
-router.post("/checkTimeStamp/", async function (req, res) {
+router.post("/checkTimeStamp/",authorize, async function (req, res) {
 
-    let token = req.body.token;
     let timestamp = req.body.timestamp;
-    let userInfo = await getPayload(token);
+    
 
     try {
-        let check = await checkTimestamp(userInfo.UserID, timestamp);
+        let check = await checkTimestamp(req.token.userID, timestamp);
 
         if (check) {
             res.status(400).json({
@@ -64,24 +63,24 @@ router.post("/checkTimeStamp/", async function (req, res) {
     }
 });
 
-router.post("/answersIn/", async function (req, res) {
 
-    let token = req.body.token;
+router.post("/answersIn/",authorize, async function (req, res) {
+
+    
     let survayAnswers = req.body.survayAnswers;
     let timestamp = req.body.timestamp;
-    let userInfo = await getPayload(token);
 
     let sendAnswers = prpSql.sendAnswers;
-    sendAnswers.values = [survayAnswers, timestamp, userInfo.gruppe];
+    sendAnswers.values = [survayAnswers, timestamp, req.token.gruppe];
 
     let participate = prpSql.participate;
-    participate.values = [userInfo.UserID, timestamp];
+    participate.values = [req.token.userID, timestamp];
 
 
     try {
 
 
-        let check = await checkTimestamp(userInfo.UserID, timestamp);
+        let check = await checkTimestamp(req.token.userID, timestamp);
 
         if (check) {
             res.status(400).json({
@@ -102,9 +101,6 @@ router.post("/answersIn/", async function (req, res) {
             error: err
         }); //something went wrong!     
     }
-
-
-
 });
 
 
@@ -134,17 +130,28 @@ async function checkTimestamp(userID, timestamp) {
 
 }
 
-async function getPayload(token) {
-    let decoded = jwt.verify(token, secret);
+// henter resultater
+router.get("/resultOut/",authorize,  async function(req,res){    
+    console.log("her er token", req.token);
 
-    let payload = {
-        UserID: decoded.userID,
-        gruppe: decoded.gruppe,
-        role: decoded.role
-    }
+    let query = `SELECT "results" FROM "public"."survayresults" WHERE gruppe = '${req.token.gruppe}'`;
+    
+    try {
+        if(req.token.role == "trener"){
+            let result = await db.any(query);
+            res.status(200).json(result); 
+            console.log(result);    
+        }
+        else{
+            res.status(401).json();
+        }
+    
+    }catch (err) {
+        res.status(500).json({error : err});
+    }   
+});
 
-    return payload;
-}
+
 
 
 

@@ -85,3 +85,18 @@ function countdownAndRedirect(res) {
     }, 1000);
 
 }
+
+
+async function getReslutFromDb() {
+    
+    let response = await getData("/innafor/survay/resultOut", localStorage.getItem("token"));
+    if(response.status == 200){
+        let res = await response.json();
+        for(let i=0; i < res.length; i++){
+            datarows.push(res[i].results);
+        }   
+    }
+    else{
+        console.log("Bruker har ikke tilgang");
+    }
+}

@@ -1,82 +1,9 @@
+
 // HVA VI FÅR FRA SERVEREN =======================
-let datarows = [
-    {
-        besvarelse: [
-            {
-                question: "Spm1",
-                answer: "3",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm2",
-                answer: "3",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm3",
-                answer: "3",
-                tag: "treningsinnhold"
-            }
-        ]
-    },
-    {
-        besvarelse: [
-            {
-                question: "Spm1",
-                answer: "3",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm2",
-                answer: "4",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm3",
-                answer: "2",
-                tag: "treningsinnhold"
-            }
-        ]
-    },
-    {
-        besvarelse: [
-            {
-                question: "Spm1",
-                answer: "2",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm2",
-                answer: "5",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm3",
-                answer: "3",
-                tag: "treningsinnhold"
-            }
-        ]
-    },
-    {
-        besvarelse: [
-            {
-                question: "Spm1",
-                answer: "5",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm2",
-                answer: "5",
-                tag: "trivsel"
-            },
-            {
-                question: "Spm3",
-                answer: "5",
-                tag: "treningsinnhold"
-            }
-        ]
-    }
-]
+let datarows = [];
+
+console.log(datarows);
+
 
 // ARRAYS ========================================
 let answers = []; // [[spiller1 svar1, spiller1 svar2],[spiller2 svar1, spiller2 svar2] ...]
@@ -398,6 +325,7 @@ function makeQuestionChart() {
 init();
 
 async function init() {
+    await getReslutFromDb();
     await makeAnswersArray();
     await makeQuestionsArray();
     await makeTagsArray();
