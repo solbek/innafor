@@ -57,7 +57,7 @@
         <img class="sidebar-logo" src="img/innafor_logo_midl.png">
         <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
         <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
-        <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Bli kontaktet</h3>
+        <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
         <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
         <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
         <h3 class="sidebar-element" onclick="displayProfile();toggleSidebar()">Profil</h3>
@@ -67,65 +67,13 @@
         </div>
     </div>
     <div class="sidebar-overlay"></div>
-
-    <!-- POPUP IFRAME -->
-    <div id="iframe-overlay">
-        <div class="popup-iframe">
-            <i class="fas fa-times close"></i>
-            <iframe id="iframe"></iframe>
-        </div>
+    
+    <div class="underutviling-text">
+        <h2>Denne siden er under utvikling og kommer i fremtiden.</h2>
+    
     </div>
 
-    <!-- LOGO -->
-    <div class="container title">
-        <div class="row">
-            <div class="col-12">
-                <img class="mainlogo" src="img/innafor_logo_midl.png">
-            </div>
-        </div>
-    </div>
 
-    <!-- KNAPPER -->
-    <div class="container btn-board">
-        <div class="row">
-            <div class="col-4 col-lg-2">
-                <button id="formPage" type="button" class="btn btn-light btn-circle btn-xl" onclick="displayFormPage()">
-                    <i class="fas fa-2x fa-thumbs-up"></i>
-                </button>
-                <p id="formPageBtnTxt" class="mainPageButtonTxt">Si ifra</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayContactPage()">
-                    <i class="fas fa-2x fa-hands-helping"></i>
-                </button>
-                <p class="mainPageButtonTxt">Bli kontaktet</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl">
-                    <i class="fas fa-2x fa-chart-pie"></i>
-                </button>
-                <p class="mainPageButtonTxt">Fremgang</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" id="jerv-btn">
-                    <img src="img/jerv_logo.png">
-                </button>
-                <p class="mainPageButtonTxt">Jerv.no</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" id="snakkommobbing-btn">
-                    <img src="img/snakk_om_mobbing_logo.png">
-                </button>
-                <p class="mainPageButtonTxt">SOM.no</p>
-            </div>
-            <div class="col-4 col-lg-2">
-                <button type="button" class="btn btn-light btn-circle btn-xl" onclick="displayProfile()">
-                    <i class="fas fa-2x fa-user"></i>
-                </button>
-                <p class="mainPageButtonTxt">Profil</p>
-            </div>
-        </div>
-    </div>
 
 </body>
 <!-- MINE JAVASCRIPT -->
@@ -136,45 +84,6 @@
 <script src="js/client_survayScript.js"></script>
 
 <script>
-    // GÅ TIL SIDER
-    function displayContactPage(){
-        window.location = "contact.html"
-    }
-    
-    function displayProfile(){
-        window.location = "profil.html"
-    }
-    // DISPLAYKONTROLL IFRAME -----------------------------
-    let iframeOverlay = document.getElementById('iframe-overlay');
-    let iframe = document.getElementById("iframe");
-    let closeIcon = document.getElementsByClassName("close")[0];
-    let btnJerv = document.getElementById("jerv-btn");
-    let btnSOM = document.getElementById("snakkommobbing-btn");
-
-    btnJerv.onclick = displayJervIframe;
-    btnSOM.onclick = displaySOMIframe;
-    closeIcon.onclick = function() {
-        iframeOverlay.style.display = "none";
-    }
-
-
-    window.onclick = function(event) {
-        if (event.target == iframeOverlay) {
-            iframeOverlay.style.display = "none";
-        }
-    }
-
-    function displayJervIframe() {
-        iframe.src = "http://www.fkjerv.no/";
-        iframeOverlay.style.display = "block";
-    }
-
-    function displaySOMIframe() {
-        iframe.src = "http://www.snakkommobbing.no/";
-        iframeOverlay.style.display = "block";
-    }
-
-
     (async function() {
             let checkToken = await verifyToken();
             if (checkToken.status !== 200) {
