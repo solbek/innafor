@@ -64,9 +64,6 @@ router.post("/login/", async function (req, res) {
 });
 
 
-
-
-
 router.post("/register/", async function (req, res) {
     let brukernavn = req.body.brukernavn;
     let gruppe = req.body.gruppe;

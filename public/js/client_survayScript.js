@@ -18,7 +18,6 @@ function getTimeStamp(d) {
 
 
 
-///TODO: Gi brukeren tibakemelding at skjemaet er sendt, og hvis de allerede har svart denne uka. Kanskje legge over et grått filter til å indikere at den ikke er tilgjenlig med en tidtaker som vil si ifra når man kan svare igjen.
 async function sendSurvay() {
 
     let date = getTimeStamp(new Date());

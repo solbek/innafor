@@ -10,6 +10,12 @@ prpSql.regUser = new PrpSt('regUser',`INSERT INTO "public"."brukere" ("userid", 
 
 prpSql.findUser = new PrpSt('findUser', `SELECT * FROM "public"."brukere" WHERE brukernavn = $1`);
 
+prpSql.getHash = new PrpSt('getHash', `SELECT hash FROM "public"."brukere" WHERE userid = $1`);
+
+//UpdateUser----------
+prpSql.updateHash = new PrpSt('updateHash', `UPDATE "public"."brukere" SET "hash" = $1 WHERE "userid" = $2`);
+
+
 //Survay---------------
 prpSql.sendAnswers = new PrpSt('sendAnswers', `INSERT INTO "public"."survayresults" ("id", "results", "timestamp", "gruppe") VALUES (DEFAULT, $1, $2, $3)`);
 

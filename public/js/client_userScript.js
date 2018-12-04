@@ -44,7 +44,7 @@ async function register() {
     }
 };
 
-
+// TOKEN CHECK ==========================================
 
 async function verifyToken() {
     let res = await getData("/innafor/users/verifyToken");
@@ -54,18 +54,29 @@ async function verifyToken() {
 
 // USER SETTINGS ==========================================
 
-async function changePassword(){
+async function updatePassword(){
+    
+    if(getId("newPassword").value !== getId("newPasswordRep").value){
+        getId("userUpdateOutput").innerHTML = "Nytt passord matcher ikke";
+        return;
+       };
     
     let data = {
         oldPassword: getId("oldPassword").value,
         newPassword: getId("newPassword").value,
-        newPasswordRep: get("newPasswordRep").value,
-        token: localstorage.getItem("token")
-    }    
-}
+        token: localStorage.getItem("token")
+    }
+    
+    let res = await sendData("/innafor/editUsers/updatePassword", data);
+    res = await res.json();
+    getId("userUpdateOutput").innerHTML = res;
+    
+    
+};
+
 
 // Logout ==========================================
-async function logout(){
+function logout(){
     
     localStorage.removeItem("token");
     window.location = "/";
