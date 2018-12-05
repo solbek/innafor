@@ -56,7 +56,7 @@
         <i class="fas fa-arrow-right close-menu-icon"></i>
         <img class="sidebar-logo" src="img/innafor_logo_midl.png">
         <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()">Hjem</h3>
-        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
+        <h3 id="sidebar-formPage" class="sidebar-element" onclick="displayFormPage();toggleSidebar()">Si ifra</h3>
         <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()">Bli kontaktet</h3>
         <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()">Jerv.no</h3>
         <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()">Snakkommobbing.no</h3>
@@ -172,25 +172,28 @@
     // INIT -----------------------------
     (async function() {
 
-            let checkToken = await verifyToken();
-            if (checkToken.status !== 200) {
-                window.location = '/';
-                return;
-            }
-           checkToken = await checkToken.json();
-           if(checkToken.role == "trener"){
-                console.log(checkToken.role);
-                getId("formPage").onclick = displayResultPage
-                getId("formPageBtnTxt").innerHTML= "Resultater"
-           }else{
-                console.log(checkToken.role);
-                getId("formPage").onclick = displayFormPage
-                getId("formPageBtnTxt").innerHTML= "Si ifra"
-           }
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
+        checkToken = await checkToken.json();
+        if (checkToken.role == "trener") {
+            console.log(checkToken.role);
+            getId("formPage").onclick = displayResultPage;
+            getId("formPageBtnTxt").innerHTML = "Resultater";
+            getId("sidebar-formPage").onclick = displayResultPage;
+            getId("sidebar-formPage").innerHTML = "Resultater";
+        } else {
+            console.log(checkToken.role);
+            getId("formPage").onclick = displayFormPage;
+            getId("formPageBtnTxt").innerHTML = "Si ifra";
+            getId("sidebar-formPage").onclick = displayFormPage;
+            getId("sidebar-formPage").innerHTML = "Si ifra";
+        }
 
 
     })();
-
 </script>
 
 
