@@ -70,7 +70,7 @@ function createSurvay(array) {
         let questionSet = document.createElement("div");
         //let answersSet = document.createElement("div");
 
-        let question = `<hr><p class="questionTxt">${array[i].question}</p>`
+        let question = `<hr><p class="questionTxt" alt="Spørsmål ${(i+1)}">${array[i].question}</p>`
 
         for (let j = 0; j < 5; j++) {
             let scale = j + 1
@@ -92,7 +92,7 @@ function createSurvay(array) {
                 scaleText = `Helt<br>enig`
             }
 
-            let answers = `<button class="buttonRow${i} btn-form btn-${scale}" onclick="select(${scale},${i})">${scaleText}</button>`
+            let answers = `<button class="buttonRow${i} btn-form btn-${scale}" onclick="select(${scale},${i})" alt="Knapp for å svare ${scaleText} på spørsmål ${array[i].question}">${scaleText}</button>`
             question += answers;
         }
 

@@ -76,13 +76,13 @@
 
     <div class="container chart-btn-container">
         <div class="btn-group chart-btn-group">
-            <button type="button" class="btn btn-primary chart-btn" onclick="toggleChartButton(event); makeMonthlyChart()">Denne måneden</button>
-            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeProgressChart()">Fremdrift</button>
-            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeQuestionChart()">Spørsmål</button>
+            <button type="button" class="btn btn-primary chart-btn" onclick="toggleChartButton(event); makeMonthlyChart()" alt="Knapp som åpner en graf med denne månedens gjennomsnitt sortert på spørsmålskategori">Denne måneden</button>
+            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeProgressChart()" alt="Knapp som åpner en graf med alle undersøkelsenes besvarelser sortert på spørsmålskategori og måned. Ikke funksjonell enda.">Fremdrift</button>
+            <button type="button" class="btn btn-secondary chart-btn" onclick="toggleChartButton(event); makeQuestionChart()" alt="Knapp som åpner grafer over hvor mange som har svart de forskjellige alternativene sortert på spørsmål.">Spørsmål</button>
         </div>
     </div>
 
-    <div class="chart-container">
+    <div class="chart-container"  alt="Grafer som viser resultatet av brukerundersøkelsen">
     </div>
 
 

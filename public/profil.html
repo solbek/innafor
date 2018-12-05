@@ -86,15 +86,15 @@
 
     <div class="update-password-container">
         <h1>Endre passord</h1>
-        <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password">
-        <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password">
-        <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password">
-        <button id="updatePasswordBtn" class="btn btn-secondary btn-send" onclick="updatePassword()">Endre passord</button>
+        <input id="oldPassword" class="form-control" placeholder="Gammelt passord" type="password" alt="Inputfelt hvor du skriver ditt gamle passord for å endre det.">
+        <input id="newPassword" class="form-control" placeholder="Nytt passord" type="password" alt="Inputfelt hvor du skriver et nytt passord for å endre til det.">
+        <input id="newPasswordRep" class="form-control" placeholder="Gjenta passord" type="password" alt="Inputfelt hvor du gjentar ditt nyte passord for å endre til det.">
+        <button id="updatePasswordBtn" class="btn btn-secondary btn-send" onclick="updatePassword()" alt="Knapp for å sende inn nytt passord.">Endre passord</button>
         <h3 id="userUpdateOutput"></h3>
     </div>
     <div class="logout-container">
         
-        <button id="logoutBtn" class="btn btn-secondary btn-send" onclick="logout()">Logg ut</button>
+        <button id="logoutBtn" class="btn btn-secondary btn-send" onclick="logout()" alt="Knapp som logger deg ut av appen.">Logg ut</button>
     </div>
 
 
