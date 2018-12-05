@@ -142,31 +142,6 @@ router.get("/resultOut/",authorize,  async function(req,res){
         res.status(500).json({error : err});
     }   
 });
-/*
-// henter spørsmål
-router.get("/resultOut/",authorize,  async function(req,res){    
-    console.log("her er token", req.token);
-
-    let query = `SELECT "results" FROM "public"."survayresults" WHERE gruppe = '${req.token.gruppe}'`;
-    
-    try {
-        if(req.token.role == "trener"){
-            let result = await db.any(query);
-            res.status(200).json(result); 
-            console.log(result);    
-        }
-        else{
-            res.status(401).json();
-        }
-    
-    }catch (err) {
-        res.status(500).json({error : err});
-    }   
-});*/
-
-
-
-
 
 //export module -------------------------------------
 module.exports = router;

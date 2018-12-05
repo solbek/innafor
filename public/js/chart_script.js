@@ -135,7 +135,8 @@ let backgroundColors = [
     'rgba(153, 102, 255, 0.8)',
     'rgba(255, 206, 86, 0.8)',
     'rgba(75, 192, 192, 0.8)',
-    'rgba(153,102, 255, 0.8)'];
+    'rgba(153,102, 255, 0.8)'
+];
 
 Chart.defaults.global.defaultFontColor = '#ffffff';
 Chart.defaults.global.legend.display = false;
@@ -149,7 +150,6 @@ function makeMonthlyChart() {
     let myCanvas = document.createElement("canvas");
     container.appendChild(myCanvas);
     let ctx = myCanvas.getContext('2d');
-
 
     let myChart = new Chart(ctx, {
         type: 'bar',
