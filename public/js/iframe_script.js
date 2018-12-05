@@ -4,8 +4,6 @@ let closeIcon = document.getElementsByClassName("close")[0];
 let btnJerv = document.getElementById("jerv-btn");
 let btnSOM = document.getElementById("snakkommobbing-btn");
 
-
-
 closeIcon.onclick = function () {
     iframeOverlay.style.display = "none";
 }

@@ -23,6 +23,10 @@ if (loggedIn) {
 
 // DISPLAYKONTROLL ====================
 
+function displayMainPage() {
+    window.location = 'mainPage.html';
+}
+
 function displayFormPage() {
     window.location = 'survey.html';
 }
