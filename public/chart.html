@@ -60,7 +60,7 @@
         <i class="fas fa-arrow-right close-menu-icon" alt="Knapp som lukker menyen"></i>
         <img class="sidebar-logo" src="img/innafor_logo_midl.png" alt="Logoen til innafor i menyen">
         <h3 class="sidebar-element" onclick="displayMainPage();toggleSidebar()" alt="Knapp som tar deg til hovedsiden">Hjem</h3>
-        <h3 class="sidebar-element" onclick="displayFormPage();toggleSidebar()" alt="Knapp som tar deg til undersøkelsen">Si ifra</h3>
+        <h3 id="sidebar-formPage" class="sidebar-element" onclick="displayFormPage();toggleSidebar()" alt="Knapp som tar deg til undersøkelsen">Si ifra</h3>
         <h3 class="sidebar-element" onclick="displayContactPage();toggleSidebar()" alt="Knapp som tar deg til siden hvor du kan kontakte trener">Bli kontaktet</h3>
         <h3 class="sidebar-element" onclick="displayJervIframe();toggleSidebar()" alt="Knapp som åpner jerv sin hjemmeside">Jerv.no</h3>
         <h3 class="sidebar-element" onclick="displaySOMIframe();toggleSidebar()" alt="Knapp som åpner snakkommobbing.no">Snakkommobbing.no</h3>
@@ -93,6 +93,7 @@
 <script src="js/serverRequests.js" type="application/javascript"></script>
 <script src="js/client_survayScript.js" type="application/javascript"></script>
 <script src="js/chart_script.js" type="application/javascript"></script>
+<script src="js/client_userScript.js"></script>
 
 <script>
     function toggleChartButton(evt) {
@@ -104,6 +105,29 @@
         evt.currentTarget.classList.add("btn-primary");
         evt.currentTarget.classList.remove("btn-secondary");
     }
+    
+    
+        // INIT -----------------------------
+    (async function() {
+
+        let checkToken = await verifyToken();
+        if (checkToken.status !== 200) {
+            window.location = '/';
+            return;
+        }
+        checkToken = await checkToken.json();
+        if (checkToken.role == "trener") {
+            getId("sidebar-formPage").onclick = displayResultPage;
+            getId("sidebar-formPage").innerHTML = "Resultater";
+        } else {
+            getId("sidebar-formPage").onclick = displayFormPage;
+            getId("sidebar-formPage").innerHTML = "Si ifra";
+        }
+
+
+    })();
+    
+    
 </script>
 
 
