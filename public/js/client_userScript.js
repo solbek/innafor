@@ -79,5 +79,5 @@ async function updatePassword(){
 function logout(){
     
     localStorage.removeItem("token");
-    window.location = "/";
+    window.location = "index.html";
     }
