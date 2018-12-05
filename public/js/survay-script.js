@@ -2,59 +2,59 @@ let survayQA = {
     "besvarelse": [
          /*-----Transformasjonsledelse----*/
         {
-            question: "Jeg opplever at treneren har tro på meg",
+            question: "Jeg opplever at treneren har tro på meg.",
             answer: "",
             tag: "Transformasjonsledelse"
             },
         {
-            question: "Jeg opplever at treneren hører på mine forslag",
+            question: "Jeg opplever at treneren hører på mine forslag.",
             answer: "",
             tag: "Transformasjonsledelse"
             },
         {
-            question: "Treneren min er opptatt av Fair Play ",
+            question: "Treneren min er opptatt av Fair Play.",
             answer: "",
             tag: "Transformasjonsledelse"
             },
         {
-            question: "Treneren min ser meg og viser interesse for det jeg gjør",
+            question: "Treneren min ser meg og viser interesse for det jeg gjør.",
             answer: "",
             tag: "Transformasjonsledelse"
             },
         /*-----Tilfredshet----*/
         {
-            question: "Jeg er fornøyd med måten treneren støtter meg",
+            question: "Jeg er fornøyd med måten treneren støtter meg.",
             answer: "",
             tag: "Tilfredshet"
             },
         {
-            question: "Jeg er fornøyd med måten treneren gir meg tilbakemelding",
+            question: "Jeg er fornøyd med måten treneren gir meg tilbakemelding.",
             answer: "",
             tag: "Tilfredshet"
             },
         {
-            question: "Jeg er fornøyd med treningene",
+            question: "Jeg er fornøyd med treningene.",
             answer: "",
             tag: "Tilfredshet"
             },
         /*-----Motivasjonsklima----*/
         {
-            question: "Jeg opplever at på laget mitt er det viktig å spille bedre enn de andre",
+            question: "Jeg opplever at på laget mitt er det viktig å spille bedre enn de andre.",
             answer: "",
             tag: "Motivasjonsklima"
             },
         {
-            question: "Jeg opplever at treneren gir mest oppmerksomhet til de beste spillerne",
+            question: "Jeg opplever at treneren gir mest oppmerksomhet til de beste spillerne.",
             answer: "",
             tag: "Motivasjonsklima"
             },
         {
-            question: "Jeg opplever at treneren er opptatt av at jeg prøver nye ting",
+            question: "Jeg opplever at treneren er opptatt av at jeg prøver nye ting.",
             answer: "",
             tag: "Motivasjonsklima"
             },
         {
-            question: "Jeg opplever at det å lære er viktigere enn det å vinne" ,
+            question: "Jeg opplever at det å lære er viktigere enn det å vinne." ,
             answer: "",
             tag: "Motivasjonsklima"
             }
@@ -77,19 +77,19 @@ function createSurvay(array) {
             let scaleText;
 
             if (scale == 1) {
-                scaleText = `Veldig<br>dårlig`
+                scaleText = `Helt<br>uenig`
             }
             if (scale == 2) {
-                scaleText = `Litt<br>dårlig`
+                scaleText = `Litt<br>uenig`
             }
             if (scale == 3) {
-                scaleText = `Helt<br>greit`
+                scaleText = `Ikke<br>sikker`
             }
             if (scale == 4) {
-                scaleText = `Litt<br>bra`
+                scaleText = `Litt<br>enig`
             }
             if (scale == 5) {
-                scaleText = `Veldig<br>bra`
+                scaleText = `Helt<br>enig`
             }
 
             let answers = `<button class="buttonRow${i} btn-form btn-${scale}" onclick="select(${scale},${i})">${scaleText}</button>`

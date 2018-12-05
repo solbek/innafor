@@ -39,6 +39,7 @@ function makeTagsArray() {
             tags.push(enBesvarelse[j].tag);
         }
     }
+    console.log(tags);
 }
 
 function sortAnswers() {
@@ -69,19 +70,6 @@ function sortAnswers() {
 }
 
 function makeAverageAnswersArray() {
-    let utgangspunkt = [];
-    for (let k = 0; k < answers[0].length; k++) {
-        utgangspunkt.push([]);
-        for (let j = 0; j < answers.length; j++) {
-            utgangspunkt[k].push(answers[j][k]);
-        }
-    }
-    for (let i = 0; i < utgangspunkt.length; i++) {
-        averageAnswers.push(findAverage(utgangspunkt[i]));
-    }
-}
-
-function makeAverageAnswersTagsArray() {
     let utgangspunkt = [];
     for (let k = 0; k < answers[0].length; k++) {
         utgangspunkt.push([]);
@@ -201,19 +189,26 @@ function makeProgressChart() {
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["Desember", "Januar", "Februar"],/// fikeses
+            labels: ["Demosvar1", "Demosvar2", "Denne måneden"],/// fikeses
             datasets: [{
                     label: tags[0],
-                    data: [averageAnswersByTags[0], 5, 4],
+                    data: [3, 4, averageAnswersByTags[0]],
                     backgroundColor: "rgba(0, 0, 0, 0)",
                     borderColor: backgroundColors[0],
                     borderWidth: 5
             },
                 {
                     label: tags[1],
-                    data: [averageAnswersByTags[1], 2, 3],
+                    data: [2, 1, averageAnswersByTags[1]],
                     backgroundColor: "rgba(0, 0, 0, 0)",
                     borderColor: backgroundColors[1],
+                    borderWidth: 5
+            },
+                {
+                    label: tags[2],
+                    data: [4, 5, averageAnswersByTags[2]],
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    borderColor: backgroundColors[2],
                     borderWidth: 5
             }]
         },
@@ -276,14 +271,14 @@ function makeQuestionChart() {
                 datasets: [{
                     label: 'Besvarelser',
                     data: sortedAnswers[i],
-                    backgroundColor: backgroundColors[i]
+                    backgroundColor: backgroundColors[1]
         }]
             },
             options: {
                 title: {
                     display: true,
                     text: questions[i],
-                    fontSize: 35,
+                    fontSize: 20,
                     fontColor: 'rgb(25,25,25)'
                 },
                 scales: {
