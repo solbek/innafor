@@ -149,6 +149,12 @@ function makeMonthlyChart() {
         }]
         },
         options: {
+            legend: {
+                display: false,
+            },
+            label: {
+                display: false,
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -166,7 +172,8 @@ function makeMonthlyChart() {
             }],
                 xAxes: [{
                     ticks: {
-                        fontSize: 16,
+                        display: false,
+                        fontSize: 10,
                         fontStyle: 'bold'
                     },
                     gridLines: {
