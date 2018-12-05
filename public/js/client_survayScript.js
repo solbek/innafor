@@ -18,7 +18,6 @@ function getTimeStamp(d) {
 
 
 
-///TODO: Gi brukeren tibakemelding at skjemaet er sendt, og hvis de allerede har svart denne uka. Kanskje legge over et grått filter til å indikere at den ikke er tilgjenlig med en tidtaker som vil si ifra når man kan svare igjen.
 async function sendSurvay() {
 
     let date = getTimeStamp(new Date());
@@ -79,8 +78,24 @@ function countdownAndRedirect(res) {
         timeleft--;
         if (timeleft == -1) {
             clearInterval(downloadTimer);
-            window.location = 'mainPage.html';
+            window.location = '/mainPage.html';
+
         }
     }, 1000);
 
+}
+
+
+async function getReslutFromDb() {
+    
+    let response = await getData("/innafor/survay/resultOut", localStorage.getItem("token"));
+    if(response.status == 200){
+        let res = await response.json();
+        for(let i=0; i < res.length; i++){
+            datarows.push(res[i].results);
+        }   
+    }
+    else{
+        console.log("Bruker har ikke tilgang");
+    }
 }

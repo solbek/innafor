@@ -8,6 +8,8 @@ const prpSql = require('./dbconnect').prpSql;
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
+const authorize = require("./auth.js");
+
 const secret = process.env.SECRET;
 
 
@@ -62,9 +64,6 @@ router.post("/login/", async function (req, res) {
 });
 
 
-
-
-
 router.post("/register/", async function (req, res) {
     let brukernavn = req.body.brukernavn;
     let gruppe = req.body.gruppe;
@@ -111,23 +110,11 @@ router.post("/register/", async function (req, res) {
 
 
 
+router.get("/verifyToken/",authorize, async function (req, res) {
 
-router.post("/verifyToken/", async function (req, res) {
-
-    let token = req.body.token;
-    if (!token) {
-        res.status(403).json({
-            msg: "No token received"
-        }); //send
-        console.log("no token recived");
-        return; //quit
-    } else {
-        try {
-            
-        let userInfo = await getPayload(token)
-        
+        try {  
         res.status(200).json({
-            role: userInfo.role,
+            role: req.token.role,
         });
             
         } catch (err) {
@@ -137,23 +124,8 @@ router.post("/verifyToken/", async function (req, res) {
             console.log("the token is not valid!");
             return;
         }
-    }
 
 });
-
-
-async function getPayload(token) {
-    let decoded = jwt.verify(token, secret);
-
-    let payload = {
-        UserID: decoded.userID,
-        gruppe: decoded.gruppe,
-        role: decoded.role
-    }
-
-    return payload;
-}
-
 
 
 async function findUser(brukernavn) {
