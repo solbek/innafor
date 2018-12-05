@@ -61,6 +61,8 @@ async function checkTimeStamp() {
 
         document.querySelector(".survey-overlay-message").innerHTML = res.feedback;
         console.log(res.feedback);
+        document.querySelector(".survey-title").innerHTML = "";
+        document.querySelector(".survey-container").innerHTML = "";
         countdownAndRedirect(res);
     }
 
