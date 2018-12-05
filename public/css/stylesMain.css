@@ -143,19 +143,19 @@ hr {
     background: rgba(0, 0, 0);
     opacity: 0;
     top: 0;
-    right: -100%;
+    transform: translateX(-100%);
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 1;
-    transition: opacity 0.5s;
+    transition: opacity 500ms;
     
     padding-top: 50vh;
 }
 
 .survey-overlay.active {
     opacity: 0.8;
-    right: 0%;
+    transform: none;
 }
 
 #survayDiv {
