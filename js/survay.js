@@ -12,7 +12,6 @@ const authorize = require("./auth.js");
 const secret = process.env.SECRET;
 
 /*
-
 router.use(function (req, res, next) {
 
     let token = req.body.token;
@@ -37,9 +36,9 @@ router.use(function (req, res, next) {
     next();
 });*/
 
-router.post("/checkTimeStamp/",authorize, async function (req, res) {
+router.post("/checkTimeStamp/", authorize, async function (req, res) {
 
-    let timestamp = req.body.timestamp;    
+    let timestamp = req.body.timestamp;
 
     try {
         let check = await checkTimestamp(req.token.userID, timestamp);
@@ -61,8 +60,8 @@ router.post("/checkTimeStamp/",authorize, async function (req, res) {
     }
 });
 
-router.post("/answersIn/",authorize, async function (req, res) {
-    
+router.post("/answersIn/", authorize, async function (req, res) {
+
     let survayAnswers = req.body.survayAnswers;
     let timestamp = req.body.timestamp;
 
@@ -72,23 +71,29 @@ router.post("/answersIn/",authorize, async function (req, res) {
     let participate = prpSql.participate;
     participate.values = [req.token.userID, timestamp];
 
+
     try {
         let check = await checkTimestamp(req.token.userID, timestamp);
-
+        let answerIsNull = await checkAnswers(survayAnswers);
+    
         if (check) {
+             res.status(400).json({
+                 feedback: "Du har allerede deltatt denne uken",
+             }).end();
+         }else if(answerIsNull){
             res.status(400).json({
-                feedback: "Du har allerede deltatt denne uken",
-            }).end();
-        } else {
+                 feedback: "vennligst svar på alle svarene",
+             }).end();
+             
+         }else {
+             let answerIn = await db.any(sendAnswers);
+             let writeParticipate = await db.any(participate);
 
-            let answerIn = await db.any(sendAnswers);
-            let writeParticipate = await db.any(participate);
+             res.status(200).json({
+                 feedback: "Skjema er sendt",
+             }).end();
 
-            res.status(200).json({
-                feedback: "Skjema er sendt",
-            }).end();
-
-        }
+         }
     } catch (err) {
         res.status(500).json({
             error: err
@@ -96,6 +101,25 @@ router.post("/answersIn/",authorize, async function (req, res) {
     }
 });
 
+
+async function checkAnswers(survey) {
+    try {
+        for (let i = 0; i < survey.besvarelse.length; i++) {
+
+            if (survey.besvarelse[i].answer == "") {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    } catch (err) {
+        res.status(500).json({
+            error: err
+        }); //something went wrong!  
+
+
+    }
+}
 
 async function checkTimestamp(userID, timestamp) {
 
@@ -123,24 +147,25 @@ async function checkTimestamp(userID, timestamp) {
 }
 
 // henter resultater
-router.get("/resultOut/",authorize,  async function(req,res){    
+router.get("/resultOut/", authorize, async function (req, res) {
     console.log("her er token", req.token);
 
     let query = `SELECT "results" FROM "public"."survayresults" WHERE gruppe = '${req.token.gruppe}'`;
-    
+
     try {
-        if(req.token.role == "trener"){
+        if (req.token.role == "trener") {
             let result = await db.any(query);
-            res.status(200).json(result); 
-            console.log(result);    
-        }
-        else{
+            res.status(200).json(result);
+            console.log(result);
+        } else {
             res.status(401).json();
         }
-    
-    }catch (err) {
-        res.status(500).json({error : err});
-    }   
+
+    } catch (err) {
+        res.status(500).json({
+            error: err
+        });
+    }
 });
 
 //export module -------------------------------------
