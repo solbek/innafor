@@ -201,7 +201,7 @@ function makeProgressChart() {
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["Desember", "Januar", "Februar"],
+            labels: ["Desember", "Januar", "Februar"],/// fikeses
             datasets: [{
                     label: tags[0],
                     data: [averageAnswersByTags[0], 5, 4],
@@ -255,12 +255,13 @@ function makeQuestionChart() {
     let div = document.createElement("div");
     for (let i = 0; i < questions.length; i++) {
         let html = "";
-        html += `<div class="horizontal-chart-container">`;
-        html += `<div class="horizontal-chart-wrapper">`;
-        html += `<canvas id="canvas${i}" class="horizontal-chart"></canvas>`;
-        html += `</div>`;
-        html += `</div>`;
-
+        html +=`
+            <div class="horizontal-chart-container">
+            <div class="horizontal-chart-wrapper">
+            <canvas id="canvas${i}" class="horizontal-chart"></canvas>
+            </div>
+            </div>
+        `;
         div.innerHTML += html;
     }
     container.appendChild(div);

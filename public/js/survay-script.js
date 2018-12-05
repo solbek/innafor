@@ -1,30 +1,67 @@
 let survayQA = {
     "besvarelse": [
+         /*-----Transformasjonsledelse----*/
         {
-            question: "Spm1",
+            question: "Jeg opplever at treneren har tro på meg",
             answer: "",
-            tag: "trivsel"
+            tag: "Transformasjonsledelse"
             },
         {
-            question: "Spm2",
+            question: "Jeg opplever at treneren hører på mine forslag",
             answer: "",
-            tag: "trivsel"
+            tag: "Transformasjonsledelse"
             },
         {
-            question: "Spm3",
+            question: "Treneren min er opptatt av Fair Play ",
             answer: "",
-            tag: "treningsinnhold"
+            tag: "Transformasjonsledelse"
+            },
+        {
+            question: "Treneren min ser meg og viser interesse for det jeg gjør",
+            answer: "",
+            tag: "Transformasjonsledelse"
+            },
+        /*-----Tilfredshet----*/
+        {
+            question: "Jeg er fornøyd med måten treneren støtter meg",
+            answer: "",
+            tag: "Tilfredshet"
+            },
+        {
+            question: "Jeg er fornøyd med måten treneren gir meg tilbakemelding",
+            answer: "",
+            tag: "Tilfredshet"
+            },
+        {
+            question: "Jeg er fornøyd med treningene",
+            answer: "",
+            tag: "Tilfredshet"
+            },
+        /*-----Motivasjonsklima----*/
+        {
+            question: "Jeg opplever at på laget mitt er det viktig å spille bedre enn de andre",
+            answer: "",
+            tag: "Motivasjonsklima"
+            },
+        {
+            question: "Jeg opplever at treneren gir mest oppmerksomhet til de beste spillerne",
+            answer: "",
+            tag: "Motivasjonsklima"
+            },
+        {
+            question: "Jeg opplever at treneren er opptatt av at jeg prøver nye ting",
+            answer: "",
+            tag: "Motivasjonsklima"
+            },
+        {
+            question: "Jeg opplever at det å lære er viktigere enn det å vinne" ,
+            answer: "",
+            tag: "Motivasjonsklima"
             }
-
-
-        ]
+    ]
 };
 
-
-
 createSurvay(survayQA.besvarelse);
-
-
 
 function createSurvay(array) {
     let survay = getId("survay");
@@ -79,5 +116,4 @@ function select(scale, rowIndex) {
     buttonRow[scale - 1].className += " selected";
 
     console.log(survayQA.besvarelse);
-
 }
