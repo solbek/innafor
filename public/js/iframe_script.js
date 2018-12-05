@@ -19,11 +19,13 @@ window.onclick = function (event) {
 
 function displayJervIframe() {
     iframe.src = "http://www.fkjerv.no/";
+    iframe.alt = "Websiden til FK Jerv";
     iframeOverlay.style.display = "block";
 }
 
 function displaySOMIframe(){
     iframe.src = "http://www.snakkommobbing.no/";
+    iframe.alt = "Websiden til snakk om mobbing";
     iframeOverlay.style.display = "block";
 }
 

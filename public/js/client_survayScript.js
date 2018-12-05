@@ -11,15 +11,10 @@ function getTimeStamp(d) {
 
     let month = new Date().getMonth() + 1;
 
-
     return [weekNo, month, d.getUTCFullYear()]
 }
 
-
-
-
 async function sendSurvay() {
-
     let date = getTimeStamp(new Date());
     let timestamp = `W${date[0]}-M${date[1]}-Y${date[2]}`
 
@@ -39,7 +34,6 @@ async function sendSurvay() {
         res = await res.json();
         getId("survayOutput").innerHTML = res.feedback;
     }
-
 };
 
 async function checkTimeStamp() {
@@ -65,7 +59,6 @@ async function checkTimeStamp() {
         document.querySelector(".survey-container").innerHTML = "";
         countdownAndRedirect(res);
     }
-
 };
 
 function countdownAndRedirect(res) {
@@ -81,12 +74,9 @@ function countdownAndRedirect(res) {
         if (timeleft == -1) {
             clearInterval(downloadTimer);
             window.location = '/mainPage.html';
-
         }
     }, 1000);
-
 }
-
 
 async function getReslutFromDb() {
     
