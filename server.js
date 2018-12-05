@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.set('Access-Control-Allow-Origin', '*');
     res.set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-    res.set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    res.set("Access-Control-Allow-Headers", " X-Custom-Header");
     next(); //go to the specified route
 });
 
