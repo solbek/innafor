@@ -11,7 +11,6 @@ const authorize = require("./auth.js");
 
 const secret = process.env.SECRET;
 
-
 /*
 
 router.use(function (req, res, next) {
@@ -40,8 +39,7 @@ router.use(function (req, res, next) {
 
 router.post("/checkTimeStamp/",authorize, async function (req, res) {
 
-    let timestamp = req.body.timestamp;
-    
+    let timestamp = req.body.timestamp;    
 
     try {
         let check = await checkTimestamp(req.token.userID, timestamp);
@@ -63,9 +61,7 @@ router.post("/checkTimeStamp/",authorize, async function (req, res) {
     }
 });
 
-
 router.post("/answersIn/",authorize, async function (req, res) {
-
     
     let survayAnswers = req.body.survayAnswers;
     let timestamp = req.body.timestamp;
@@ -76,10 +72,7 @@ router.post("/answersIn/",authorize, async function (req, res) {
     let participate = prpSql.participate;
     participate.values = [req.token.userID, timestamp];
 
-
     try {
-
-
         let check = await checkTimestamp(req.token.userID, timestamp);
 
         if (check) {
@@ -92,7 +85,7 @@ router.post("/answersIn/",authorize, async function (req, res) {
             let writeParticipate = await db.any(participate);
 
             res.status(200).json({
-                feedback: "Undersøkelse er sendt",
+                feedback: "Skjema er sendt",
             }).end();
 
         }
@@ -127,7 +120,6 @@ async function checkTimestamp(userID, timestamp) {
             error: err
         }); //something went wrong!     
     }
-
 }
 
 // henter resultater
@@ -150,6 +142,27 @@ router.get("/resultOut/",authorize,  async function(req,res){
         res.status(500).json({error : err});
     }   
 });
+/*
+// henter spørsmål
+router.get("/resultOut/",authorize,  async function(req,res){    
+    console.log("her er token", req.token);
+
+    let query = `SELECT "results" FROM "public"."survayresults" WHERE gruppe = '${req.token.gruppe}'`;
+    
+    try {
+        if(req.token.role == "trener"){
+            let result = await db.any(query);
+            res.status(200).json(result); 
+            console.log(result);    
+        }
+        else{
+            res.status(401).json();
+        }
+    
+    }catch (err) {
+        res.status(500).json({error : err});
+    }   
+});*/
 
 
 
