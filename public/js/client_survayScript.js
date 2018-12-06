@@ -73,7 +73,7 @@ function countdownAndRedirect(res) {
         timeleft--;
         if (timeleft == -1) {
             clearInterval(downloadTimer);
-            window.location = '/mainPage.html';
+            window.location = 'mainPage.html';
         }
     }, 1000);
 }
