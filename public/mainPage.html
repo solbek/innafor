@@ -44,8 +44,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <!-- PHONEGAP CORDOVA SCRIPT -->
-    <script type="text/javascript" src="cordova.js"></script>
+
 
 </head>
 
@@ -158,13 +157,11 @@
         }
         checkToken = await checkToken.json();
         if (checkToken.role == "trener") {
-            console.log(checkToken.role);
             getId("formPage").onclick = displayResultPage;
             getId("formPageBtnTxt").innerHTML = "Resultater";
             getId("sidebar-formPage").onclick = displayResultPage;
             getId("sidebar-formPage").innerHTML = "Resultater";
         } else {
-            console.log(checkToken.role);
             getId("formPage").onclick = displayFormPage;
             getId("formPageBtnTxt").innerHTML = "Si ifra";
             getId("sidebar-formPage").onclick = displayFormPage;

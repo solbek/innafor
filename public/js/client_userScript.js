@@ -10,7 +10,6 @@ async function login() {
     if (res.status == 200) {
         res = await res.json();
         localStorage.setItem("token",res.token);
-        getId("loginOutput").innerHTML = "Du har trykket på knappen";
         window.location = 'mainPage.html';
     } else {
         res = await res.json();

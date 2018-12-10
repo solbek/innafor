@@ -1,7 +1,7 @@
 /*-----------------------------
 ---------- SIDEBAR ------------
 -----------------------------*/
-console.log(window.location);
+
 if (window.location.pathname == '/mainPage.html') {
     let backIcon = document.querySelector(".back-icon");
     backIcon.style.display = "none";
